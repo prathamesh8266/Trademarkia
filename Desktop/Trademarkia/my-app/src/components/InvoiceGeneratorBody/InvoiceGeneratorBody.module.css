@@ -1,0 +1,129 @@
+.invoiceHolder {
+  width: 60%;
+  margin: auto;
+  margin-top: 40px;
+  box-shadow: 0px 10px 8px 10px #e1e1e1;
+  height: 1000px;
+  border-top: 8px solid #7161c5;
+}
+
+.companyLogo {
+  display: flex;
+  align-items: center;
+}
+.companyLogo > h2 {
+  color: #7161c5;
+  margin-left: 10px;
+}
+
+.invoiceHead {
+  padding: 20px 20px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invoiceHead > p {
+  width: 30%;
+}
+
+.datailsInput {
+  font-weight: 600;
+  height: 15px;
+  border-radius: 10px;
+  width: 350px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.details {
+  padding: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightDetails > h3 {
+  font-size: 15px;
+  color: #7161c5;
+  margin: 0;
+  padding: 0;
+}
+
+.rightDetails > p {
+  color: #7161c5;
+  font-size: 35px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.descriptionBody {
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid #7161c5;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: 1fr 1fr;
+}
+
+.description {
+  grid-column: 1/2;
+  color: #7161c5;
+  font-weight: 600;
+  /* background-color: black; */
+}
+
+.totalHolder {
+  grid-column: 4/5;
+  grid-row: 2/3;
+}
+
+.hr {
+  grid-column: 1/2;
+  width: 2px;
+  color: black;
+}
+.total {
+  color: #7161c5;
+  font-weight: 600;
+}
+.quantity {
+  color: #7161c5;
+  font-weight: 600;
+}
+.totalHolder {
+  font-weight: 600;
+}
+.rate {
+  color: #7161c5;
+  font-weight: 600;
+}
+
+.rateHolder {
+  grid-column: 2/3;
+  font-weight: 600;
+  grid-row: 2/3;
+}
+
+.inputTest {
+  grid-row: 2/3;
+  width: 300px;
+  height: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.inputNUmber {
+  border-radius: 10px;
+  height: 20px;
+  grid-row: 2/3;
+  border: 1px solid black;
+  padding: 10px;
+}
