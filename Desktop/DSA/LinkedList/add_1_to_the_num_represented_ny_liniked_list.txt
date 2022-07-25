@@ -1,0 +1,113 @@
+package DSA;
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class dsa {	
+	
+	static class Node{
+		int data;
+		Node next;
+		Node(int d){			
+			data = d;
+			next = null;
+		}
+	}
+	static class linkedList{
+		Node head;
+		void hardCode() {
+			head = new Node(2);
+//			head.next = new Node(9);
+//			head.next.next = new Node(9);
+//			head.next.next.next = new Node(5);
+//			head.next.next.next.next = new Node(5);
+//			head.next.next.next.next.next = new Node(6);
+//			head.next.next.next.next.next.next = new Node(7);
+		}
+		void print(Node head) {
+			Node temp = head;
+			while(temp!=null) {
+				System.out.print(temp.data+" ");
+				temp = temp.next;
+			}
+		}
+		 Node getData(Node head){
+			 Node temp = head;
+			 if(head.next == null) {
+				 head.data+=1;
+				 return head;
+			 }
+		     Node prev = null;
+		     Node next = null;
+		     Node cur = head;
+		     while(cur!=null) {
+		    	 next = cur.next;
+		    	 cur.next = prev;
+		    	 prev = cur;
+		    	 cur = next;
+		     }
+		     head = prev;
+		     temp = head;
+		     while(temp!=null) {
+		    	 if(temp.next == null) {
+		    		 temp.data+=1;
+		    		 break;
+		    	 }
+		    	 if(temp.data == 9) {
+		    		 temp.data = 0;
+		    	 }else {
+		    		 temp.data+=1;
+		    		 break;
+		    	 }
+		    	 temp = temp.next;
+		     }
+		     prev = null;
+		     next = null;
+		     cur = head;
+		     while(cur!=null) {
+		    	 next = cur.next;
+		    	 cur.next = prev;
+		    	 prev = cur;
+		    	 cur = next;
+		     }
+		     head = prev;
+		     return head;
+	    }
+	}
+	 public static void main(String[] args){
+		linkedList ll = new linkedList();
+		ll.hardCode();
+		ll.print(ll.getData(ll.head));
+//		ll.print(ll.head);
+	 }
+  	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

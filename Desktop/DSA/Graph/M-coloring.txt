@@ -1,0 +1,92 @@
+package DSA;	
+import java.util.*;
+
+// https://practice.geeksforgeeks.org/problems/m-coloring-problem-1587115620/1#
+
+class Node implements Comparator<Node>{
+	int data,weight;
+	Node(int d,int w){
+		data = d;
+		weight = w;
+	}
+	Node(){}
+	@Override
+	public int compare(Node o1, Node o2) {
+		if(o1.weight<o2.weight)
+			return -1;
+		if(o1.weight>o2.weight)
+			return 1;
+		return 0;
+	}
+}
+
+
+class Graph{
+//	ArrayList<Integer> adj[] = new ArrayList<>()[4];
+	List<Integer>[] adj;
+	Graph(int number){
+		adj = new List[number];
+		for (int i = 0; i < number; i++) {
+		    adj[i] = new ArrayList<>();
+		}
+	}
+	
+	void addUndirectedEdges(int source,int destination) {
+		adj[source].add(destination);
+		adj[destination].add(source);
+	}
+}
+
+public class dsa {
+	static boolean isSafe(int nodeCol,List<Integer>[] G, int[] color, int n, int C) {
+		for(int num : G[n]) {
+			if(color[num] == nodeCol) return false;
+		}
+		return true;
+	}
+	
+	public static boolean graphColoring(List<Integer>[] G, int[] color, int n, int C) {
+		if(n == G.length) return true;
+		
+        for(int i=1;i<=C;i++) {
+        	if(isSafe(i,G,color,n,C)) {
+        		color[n] = i;
+        		if(graphColoring(G,color,n+1,C)) return true;
+        		color[n] = 0;
+        	}
+        }
+        return false;
+    }
+	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 4;
+		Graph g = new Graph(n);
+		for(int i=0;i<5;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+//			int weight = sc.nextInt();
+			g.addUndirectedEdges(source, destination);
+		}
+		graphColoring(g.adj,new int[4],0,3);
+		System.out.println(graphColoring(g.adj,new int[4],0,2));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

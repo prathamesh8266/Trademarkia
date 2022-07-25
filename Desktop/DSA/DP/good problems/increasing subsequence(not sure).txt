@@ -1,0 +1,24 @@
+package test;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+public class Test {		
+
+    public static void main(String args[])
+    {
+       int arr[] = {3,2,4};
+       System.out.println(test(arr,arr.length,0));
+    }
+
+    static int test(int[] a1,int i,int prev) { 	
+    	if(i == 0)
+    		return 1;
+    	System.out.println(prev);
+    	if(a1[i-1]<prev)
+    		return 1+test(a1,i-1,prev=a1[i-1]);
+    	else
+    		return Math.max(test(a1,i-1,prev=a1[i-1]), test(a1,i-1,prev));
+    	
+    }
+}

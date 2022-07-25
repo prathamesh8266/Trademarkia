@@ -1,0 +1,83 @@
+package DSA;	
+import java.util.*;
+
+class Graph{
+	ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+	
+	Graph(int n){
+		for(int i=0;i<n;i++) {
+			adj.add(new ArrayList<Integer>());
+		}
+	}
+	
+	void addDirectedEdges(int source,int destination) {
+		adj.get(source).add(destination);
+//		adj.get(destination).add(source);
+	}
+}
+
+public class dsa {	
+	static Stack<Integer> s = new Stack<Integer>();
+	static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj){
+		System.out.println(adj.size());
+		boolean vis[] = new boolean[V];
+		int arr[] = new int[V];
+        for(int i=0;i<adj.size();i++) {
+        	if(!vis[i])
+        		dfs(i,adj,vis);
+        }
+        int i = 0;
+        while(!s.isEmpty()) {
+        	arr[i] = s.pop();
+        	i++;
+        }
+        for(int num:arr) {
+        	System.out.print(num+" ");
+        }
+        return arr;
+    }
+	
+	static void dfs(int i,ArrayList<ArrayList<Integer>> adj,boolean vis[]) {
+			vis[i] = true;
+			for(int num: adj.get(i)) {
+				if(!vis[num]) {
+					dfs(num,adj,vis);
+				}
+			}
+			s.push(i);
+	}
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 6;
+		Graph g = new Graph(n);
+		for(int i=0;i<6;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			g.addDirectedEdges(source, destination);
+		}
+		topoSort(6,g.adj);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

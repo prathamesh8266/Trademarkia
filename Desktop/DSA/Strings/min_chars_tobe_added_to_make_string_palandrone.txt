@@ -1,0 +1,72 @@
+package DSA;	
+
+public class dsa {
+	
+	public static void main (String[] args) {
+		String str = "CBABC";
+		String global = "";
+		int ind = 0;
+		for(int i=0;i<str.length();i++) {
+			 String s = checkPalan(str.substring(0,i+1));	
+			 if(s.length()>global.length()) {
+				 global = s;
+				 ind = i;
+			 }
+		}
+		System.out.println(global+" "+ind);
+		System.out.println(str.length()-ind-1);
+	}
+	
+	public static String checkPalan(String s) {
+		int i = 0;
+		int j = s.length()-1;
+		while(i<=j) {
+			if(s.charAt(i)!=s.charAt(j)) {
+				return "";
+			}if(i<j) {				
+				i++;j--;
+			}else {
+				break;
+			}
+		}
+		return s;
+	}
+}
+
+
+
+//   AAABAA
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

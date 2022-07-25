@@ -1,0 +1,19 @@
+package leetcode;
+import java.util.*;
+import java.util.Map.Entry;
+public class Solution {
+	
+	public static void main(String[] args) {
+		System.out.println(Stairs(4));
+	}
+	
+	static int Stairs(int stairs) {
+		if(stairs<0) {
+			return 0;
+		}
+		if(stairs==1 || stairs==0) {
+			return 1;
+		}
+		return Stairs(stairs-1)+Stairs(stairs-2)+Stairs(stairs-3);
+ }
+}

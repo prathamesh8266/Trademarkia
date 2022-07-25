@@ -1,0 +1,94 @@
+package DSA;	
+import java.util.*;
+
+class Graph{
+	LinkedList<Integer> list[];
+	Graph(int vertices){
+		list = new LinkedList[vertices];
+		for(int i=0;i<vertices;i++) {
+			list[i] = new LinkedList<Integer>();
+		}
+	}
+	void addUndirectedEdge(int source,int destination) {
+		list[source].add(destination);
+		list[destination].add(source);
+	}
+	
+	void addDirectedEdge(int source,int destination) {
+		list[source].add(destination);
+	}
+	
+	boolean isCyclic() {
+		int n = list.length;
+		boolean vis[] = new boolean[n];
+		for(int i=0;i<n;i++) {
+			vis[i]=true;
+			for(int num:list[i]) {				
+				if(!isCyclicutil(num,vis))
+					return false;
+				Arrays.fill(vis,false);
+			}			
+		}
+		return true;
+	}
+	
+	boolean isCyclicutil(int i,boolean vis[]) {
+		Stack<Integer> s = new Stack<Integer>();
+		s.push(i);
+		while(!s.isEmpty()) {
+			int cur = s.pop();
+			for(int num: list[cur]) {
+				if(!vis[num]) {
+					vis[num] = true;
+					s.push(num);
+				}else {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+}
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 4;
+		Graph g = new Graph(n);
+		int n1 = 6;
+		for(int i=0;i<n1;i++) {
+			int src = sc.nextInt();
+			int dest = sc.nextInt();
+			g.addDirectedEdge(src,dest);
+		}
+		System.out.println(g.isCyclic());
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

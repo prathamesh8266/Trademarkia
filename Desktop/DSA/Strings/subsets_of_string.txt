@@ -1,0 +1,21 @@
+package leetcode;
+import java.util.*;
+import java.util.Map.Entry;
+public class Solution {
+	
+	public static void main(String[] args) {
+	subSequence("abc",0,"");
+	}
+	
+	
+	//////// WORKS ACCORDING TO INCLUDE EXCLUDE LOGIC (TREE) //////////
+	
+	static void subSequence(String s,int index,String op) {
+		if(index==s.length()) {
+			System.out.println(op);
+			return;
+		}
+		subSequence(s,index+1,op+s.charAt(index));
+		subSequence(s,index+1,op);
+ }
+}

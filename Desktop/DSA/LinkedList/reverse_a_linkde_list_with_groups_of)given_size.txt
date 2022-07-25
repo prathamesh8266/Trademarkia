@@ -1,0 +1,103 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	static class Node{
+		int data;
+		Node next;
+		Node(int d){
+			data = d;
+			next = null;
+		}
+	}
+	static class linkedList{
+		Node head = null;
+		void add(int d) {
+			if(head == null) {
+				head = new Node(d);
+				return;
+			}	
+			Node temp = head;
+			Node toAdd = new Node(d);
+			while(temp.next!=null) {
+				temp = temp.next;
+			}
+			temp.next = toAdd;
+		}	
+	}
+	
+	static void display(Node head) {
+		Node temp = head;
+		while(temp!=null) {
+			System.out.print(temp.data+" ");
+			temp = temp.next;
+		}
+		System.out.println();
+	}
+	
+	static Node reverse(Node head,int k){
+		if(head == null) 
+				return null;
+		Node current = head;
+		Node next = null;
+		Node prev = null;
+		int count = 0;
+		while(count<k && current!=null) {
+			next = current.next;
+			current.next = prev;
+			prev = current;
+			current = next;
+			count++;
+		}
+		if(next!=null) {
+			head.next = reverse(next,k);
+		}
+		return prev;
+	}
+	
+	 public static void main(String[] args){
+		 linkedList ll = new linkedList();
+		 ll.add(1);
+		 ll.add(2);
+		 ll.add(3);
+		 ll.add(4);
+		 ll.add(5);
+		 ll.add(6);
+		 ll.add(7);
+		 ll.add(8);
+		 display(ll.head);
+		 Node li = reverse(ll.head, 3);
+		 display(li);
+	    }
+}	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

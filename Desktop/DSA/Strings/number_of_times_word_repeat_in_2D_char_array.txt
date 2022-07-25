@@ -1,0 +1,61 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args){
+			String txt = "GEEKS";
+			char[][] words = {{'D','D','D','G','D','D'},
+		            		 {'B','B','D','E','B','S'},
+		            		 {'B','S','K','E','B','K'},
+		            		 {'D','D','D','D','D','E'},
+		            		 {'D','D','D','D','D','E'},
+		            		 {'D','D','D','D','D','G'}};
+			System.out.println(searchWord(words,txt));
+		}
+		
+		public static int searchWord(char[][] grid,String word){
+			int rowLen = grid.length;
+			int colLen = grid[0].length;
+			int total = 0;
+	        for(int i=0;i<rowLen;i++) {
+	        	int ind = 0;
+	        	for(int j=0;j<colLen;j++) {
+	        		if(	grid[i][j] == word.charAt(ind)) {
+	        			total += check(grid,word,i,j);
+	        		}
+	        	}
+	        }
+	        return total;
+	    }
+		public static int check(char[][] grid,String word,int i,int j) {
+			int rowLen = grid.length;
+			int colLen = grid[0].length;
+			int tot = 0;
+			int col = j;
+			int row = i;
+			int ind = 0;
+			while(col>=0 && col<colLen && ind<word.length() && grid[i][col]==word.charAt(ind)) {
+				col++;ind++;
+			}
+			tot += ind == word.length() ? 1 : 0; 
+			ind = 0;
+			col = j;
+			while(col>=0 && col<colLen && ind<word.length() && grid[i][col]==word.charAt(ind)) {
+				col--;ind++;
+			}
+			tot += ind == word.length() ? 1 : 0; 
+			ind = 0;
+			while(row>=0 && row<colLen && ind<word.length() && grid[row][j]==word.charAt(ind)) {
+				row++;ind++;
+			}
+			tot += ind == word.length() ? 1 : 0; 
+			ind = 0;
+			row = i;
+			while(row>=0 && row<colLen && ind<word.length() && grid[row][j]==word.charAt(ind)) {
+				row--;ind++;
+			}
+			tot += ind == word.length() ? 1 : 0;
+			return tot;
+		}
+}

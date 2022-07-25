@@ -1,0 +1,107 @@
+package test;
+
+class Node
+{
+	int data;
+	Node next;
+	Node bottom;
+	
+	Node(int d)
+	{
+		data = d;
+		next = null;
+		bottom = null;
+	}
+}
+
+public class Test {		
+	
+    
+    Node head = null;
+    
+//     void add(int a) {
+//    	if(head == null) {
+//    		head = new Node(a);
+//    	}else {
+//    		Node temp = head;
+//    		while(temp.next!=null) {
+//    			temp = temp.next;
+//    		}
+//    		temp.next = new Node(a);
+//    		temp.next.prev = temp;
+//    	}
+//    }
+    
+    static void print(Node head) {
+    	Node temp = head;
+    	 System.out.println();
+    	while(temp != null) {
+    		System.out.print(temp.data+" ");
+    		temp = temp.bottom;
+    	}
+    	 System.out.println();
+    }
+    
+    static Node mixed() {
+    	Node head = new Node(5);
+    	head.bottom = new Node(7); 
+    	head.bottom.bottom = new Node(8);
+    	head.bottom.bottom.bottom = new Node(30);
+    	head.bottom.bottom.bottom.bottom = new Node(100);
+    	head.next = new Node(10);
+    	head.next.bottom = new Node(20);
+    	head.next.next = new Node(19);
+    	head.next.next.bottom = new Node(22);
+    	head.next.next.bottom.bottom = new Node(50);
+    	head.next.next.bottom.bottom.bottom = new Node(60);
+    	head.next.next.bottom.bottom.bottom.bottom = new Node(70);
+    	head.next.next.bottom.bottom.bottom.bottom.bottom = new Node(500);
+    	head.next.next.next = new Node(28);
+    	head.next.next.next.bottom = new Node(35);
+    	head.next.next.next.bottom.bottom = new Node(40);
+    	head.next.next.next.bottom.bottom.bottom = new Node(45);
+    	head.next.next.next.next = new Node(120);
+    	return head;
+    }
+
+    public static void main(String args[])
+    {
+        Node head = mixed();
+        flatten(head);
+    }
+    static void flatten(Node head) {
+    	Node h = head;
+    	Node next = head.next;
+    	merge(head,next);
+    	print(head);
+    }
+    static void merge(Node head1,Node head2) {
+    	if(head2 == null) {
+    		head1.next = null; 
+    		return;
+    	}
+    	Node h1 = head2;
+    	Node h = head1;
+    	while(h.bottom!=null && head2!=null) {
+    		if(h.bottom.data >= head2.data){
+    			Node temp = h.bottom;
+    			h.bottom = new Node(head2.data);
+    			h.bottom.bottom = temp;
+    			head2 = head2.bottom;
+    		}
+    		h = h.bottom;
+    	}
+    	while(h.bottom == null && head2 != null) {
+    		h.bottom = new Node(head2.data);
+    		h = h.bottom;
+    		head2 = head2.bottom;
+    	}
+    	merge(head1,h1.next);
+    }
+  
+  static void swap(Node a,Node b) {
+	 int t = a.data;
+	 a.data = b.data;
+	 b.data = t;
+  }
+}

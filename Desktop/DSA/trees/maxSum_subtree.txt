@@ -1,0 +1,57 @@
+import javax.imageio.ImageTranscoder;
+import java.lang.reflect.Array;
+import java.util.*;
+
+public class DSA {
+
+    static class Node {
+        Node left, right;
+        int data;
+        Node(int d) {
+            data = d;
+            left = null;
+            right = null;
+        }
+    }
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static Node tree() {
+        Node node = null;
+        int a = sc.nextInt();
+        if (a == -1) return null;
+        else node = new Node(a);
+        node.left = tree();
+        node.right = tree();
+        return node;
+    }
+
+
+    static void print(Node node) {
+        if (node == null) return;
+        print(node.left);
+        System.out.print(node.data + " ");
+        print(node.right);
+        return;
+    }
+
+    public static void main(String[] args) {
+        Node t = tree();
+        sum(t);
+        System.out.println(max);
+    }
+    static int max = Integer.MIN_VALUE;
+    static int s = 0;
+    static int sum(Node node){
+        if(node == null) return 0;
+
+        int l = sum(node.left);
+        int r = sum(node.right);
+        s = (l+r);
+//        System.out.println(s);
+        if(s+node.data > max){
+            max = s+node.data;
+        }
+        return node.data+s;
+    }
+}

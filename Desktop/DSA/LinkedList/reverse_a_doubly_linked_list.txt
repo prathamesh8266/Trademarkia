@@ -1,0 +1,74 @@
+package test;
+
+public class Test {		
+	static class Node {
+        int data;
+        Node next;
+        Node prev;
+        Node(int d){
+        	data =d;
+        	next = null;
+        	prev = null;
+        }
+    };
+    
+    Node head = null;
+    
+     void add(int a) {
+    	if(head == null) {
+    		head = new Node(a);
+    	}else {
+    		Node temp = head;
+    		while(temp.next!=null) {
+    			temp = temp.next;
+    		}
+    		temp.next = new Node(a);
+    		temp.next.prev = temp;
+    	}
+    }
+    
+    static void print(Node head) {
+    	Node temp = head;
+    	while(temp!=null) {
+    		System.out.print(temp.data+" ");
+    		temp = temp.next;
+    	}
+    	 System.out.println();
+    }
+
+    public static void main(String args[])
+    {
+        Test t = new Test();
+        Node head = null;
+        t.add(75);
+        t.add(122);
+        t.add(59);
+        t.add(196);
+        t.add(30);
+        t.add(38);
+        t.add(36);
+        t.add(194);
+        print(t.head);    
+        print(reverseDLL(t.head));
+    }
+    public static Node reverseDLL(Node  head)
+    {
+        Node front = head;
+        Node rear = head;
+        while(rear.next != null){
+            rear = rear.next;
+        }
+        while(rear != front){
+            if(front != rear){
+                int temp = rear.data;
+                rear.data = front.data;
+                front.data = temp;
+                if(front.next == rear) break;
+                rear = rear.prev;
+                front = front.next;
+            }
+            else break;
+        }
+        return head;
+    }
+}

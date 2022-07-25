@@ -1,0 +1,44 @@
+package DSA;	
+import java.util.*;
+
+/// https://www.geeksforgeeks.org/minimum-removals-array-make-max-min-k/
+
+public class dsa{
+	
+	public static void main(String args[]) {
+		int a[] = {1, 3, 4, 9, 10, 11, 12, 17, 20};
+		int dp[][] = new int[5+1][5+1];
+		for(int i[]:dp)
+			Arrays.fill(i, -1);
+		Arrays.sort(a);
+		System.out.println(minRemovals(a,0,a.length-1,4));
+	}
+   
+   
+   static public int minRemovals(int arr[],int start,int end,int k) {
+	   if(start>=end)
+		   return 100000;
+	   
+	   if(arr[end]-arr[start]<=k)
+		   return arr.length-((end-start)+1);
+	   
+	   return Math.min(minRemovals(arr,start+1,end,k),minRemovals(arr,start,end-1,k));
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

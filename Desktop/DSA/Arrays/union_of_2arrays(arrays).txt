@@ -1,0 +1,52 @@
+package DSA;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		System.out.println(doUnion(new int[] {85 ,25 ,1 ,32 ,54 ,6},new int[] {85 ,2 }));
+	}
+	 public static int doUnion(int a[], int b[]) 
+	    {
+		Set<Integer> set = new HashSet<>();
+	        for(int i=0;i<a.length;i++){
+	            set.add(a[i]);
+	        }
+	        for(int i=0;i<b.length;i++){
+	            set.add(b[i]);
+	        }
+	        return set.size();
+	    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+import javax.imageio.ImageTranscoder;
+import java.lang.reflect.Array;
+import java.util.*;
+
+public class DSA {
+
+    static class Node {
+        Node left, right;
+        int data;
+        Node(int d) {
+            data = d;
+            left = null;
+            right = null;
+        }
+    }
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static Node tree() {
+        Node node = null;
+        int a = sc.nextInt();
+        if (a == -1) return null;
+        else node = new Node(a);
+        node.left = tree();
+        node.right = tree();
+        return node;
+    }
+
+
+    static void print(Node node) {
+        if (node == null) return;
+        print(node.left);
+        System.out.print(node.data + " ");
+        print(node.right);
+        return;
+    }
+
+    public static void main(String[] args) {
+        Node t = tree();
+        longestPath(t);
+    }
+    static int max = Integer.MIN_VALUE;
+    static void longestPath(Node node){
+        int h = height(node);
+        path(node,0,0,h);
+        System.out.println(max);
+    }
+
+    static int path(Node node,int h,int sum,int height){
+        if(node == null) return 0;
+        sum += node.data;
+//        if(node.left==null && node.right==null){
+//            System.out.println(sum);
+//        }
+        if(sum > max && h == height-1){
+            max = sum;
+        }
+        path(node.left,h+1,sum,height);
+        path(node.right,h+1,sum,height);
+
+        return max;
+    }
+
+    static int height(Node node){
+        if(node == null) return 0;
+        int l = height(node.left);
+        int r = height(node.right);
+        return Math.max(l,r)+1;
+    }
+}

@@ -1,0 +1,146 @@
+package test;
+
+import java.util.*;
+
+public class Test {		
+    public static void main(String args[]){
+    	
+    	char arr[][] = {{'0','0','1','0','0'},
+    				    {'1','0','1','1','1'},
+    				    {'1','1','1','1','1'},
+    				    {'1','0','0','1','1'}};
+    	System.out.print(maximalRectangle(arr));    		
+    }
+    static class Data{
+    	int data,height;
+    	Data(int d,int h){
+    		data = d;
+    		height = h;
+    	}
+    }
+    static public int maximalRectangle(char[][] matrix) {
+    	
+    	int buildings[] = new int[matrix[0].length];
+    	int max = Integer.MIN_VALUE;
+    	for(int i=0;i<matrix.length;i++) {
+    		for(int j=0;j<matrix[0].length;j++) {
+    			if(matrix[i][j] == '1')
+    				buildings[j]+=1;
+    			else 
+    				buildings[j]=0;
+    		}
+    		for(int i1:buildings){
+    	    	System.out.print(i1+" ");
+        	}
+    		System.out.println();
+    		int maxArea = maxAreaUnderHistogram(buildings,matrix[0].length);
+        	System.out.println(maxArea);
+    		max = Math.max(max, maxArea);
+    	}
+    	return max;
+    }
+    
+    static int maxAreaUnderHistogram(int arr[],int n) {
+    	Stack<Data> s = new Stack<>();
+    	int preProcess1[] = new int[n];
+    	int preProcess2[] = new int[n];
+    	int i = 0;
+    	////////////////////// LEFT PREPROCESSING ////////////////////////
+    	while(i < n) {
+    		while(!s.isEmpty()) {
+    			Data top = s.peek();
+    			if(top.data < arr[i]) {
+    				preProcess1[i] = top.height;
+    				s.push(new Data(arr[i],i));
+    				break;
+    			}else {
+    				s.pop();
+    			}
+    		}
+    		if(s.isEmpty()) {
+    			s.push(new Data(arr[i],i));
+    			preProcess1[i] = -1; 
+    		}
+    		i++;
+    	}
+    	for(int i1:preProcess1){
+    		System.out.print(i1+" ");
+    	}
+    	System.out.println();
+    	////////////////// RIGHT PREPROCESSING /////////////////////////////
+    	while(!s.isEmpty()) s.pop();
+    	i = n-1;
+    	while(i >= 0) {
+    		while(!s.isEmpty()) {
+    			Data top = s.peek();
+    			if(top.data < arr[i]) {
+    				preProcess2[i] = top.height;
+    				s.push(new Data(arr[i],i));
+    				break;
+    			}else {
+    				s.pop();
+    			}
+    		}
+    		if(s.isEmpty()){
+    			s.push(new Data(arr[i],i));
+    			preProcess2[i] = n;
+    		}
+    		i--;
+    	}
+    	for(int i1:preProcess2){
+    		System.out.print(i1+" ");
+    	}
+    	System.out.println();
+    	int totalHeights[] = new int[n];
+    	int max = Integer.MIN_VALUE;
+    	for(int i1=0;i1<n;i1++) {
+    		max = Math.max(max, arr[i1]*(preProcess2[i1]-(preProcess1[i1]+1)));
+    	}
+    	return max;
+    }
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

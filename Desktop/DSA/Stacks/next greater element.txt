@@ -1,0 +1,61 @@
+package test;
+
+import java.util.*;
+
+// https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1#
+
+public class Test {		
+    public static void main(String args[]){
+    	
+    	long arr[] = {7,8,1,4};
+    	int n = 4;
+    	for(long i : nextLargerElement(arr,n)) {
+    		System.out.print(i+" ");
+    	}
+    }
+    
+    public static long[] nextLargerElement(long[] arr, int n){    	
+    Stack<Long> s = new Stack<>();
+    int i = arr.length-1;
+    while(i>=0) {
+    	long num = arr[i];
+    	
+    	while(!s.isEmpty()) {
+    		long top = s.peek();
+    		if(top > arr[i]) {
+    			s.push(top);
+    			s.push(arr[i]);
+    			arr[i] = top;
+    			break;
+    		}else {
+    			s.pop();
+    		}
+    	}    	
+    	if(s.isEmpty()) {
+    		arr[i] = -1;
+    		s.push(num);
+    		i--;
+    		continue;
+    	}
+    	i--;
+    }
+    return arr;
+    	
+    ////////////////////////////////// TLE ////////////////////////////////////	
+//        for(int i=0;i<n;i++) {
+//        	int j = i;
+//        	for(j=i;j<n;j++) {
+//        		if(arr[j]>arr[i]) {
+//        			arr[i] = arr[j];
+//        			break;
+//        		}
+//        	}
+//        	if(j == n) {
+//        		arr[i]=-1;
+//        	}
+//        }
+//        return arr;
+    
+    } 
+}
+	

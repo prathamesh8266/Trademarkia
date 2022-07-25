@@ -1,0 +1,87 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	static void merge(int[] arr,int left,int mid,int right) {
+		int n1 = (mid+1) - left;
+		int n2 = right - mid;
+		
+		int[] l = new int[n1];
+		int[] r = new int[n2];
+		for(int i=0;i<n1;i++) {
+			l[i] = arr[left+i];
+		}
+		for(int j=0;j<n2;j++) {
+			r[j] = arr[mid+1+j];
+		}
+		
+		int i=0,j=0;
+		int k = left;
+		while(i<n1 && j<n2) {
+			if(l[i]<r[j]) {
+				arr[k] = l[i];
+				i++;
+			}else {
+				arr[k] = r[j];
+				j++;
+			}
+			k++;
+		}
+		while(i<n1) {
+			arr[k] = l[i];
+			i++;k++;
+		}
+		while(j<n2) {
+			arr[k] = r[j];
+			j++;k++;
+		}
+	}
+	
+	static void sort(int[] arr,int start,int end){
+		if(start<end) {			
+			int mid = start+(end-start)/2;
+			sort(arr,start,mid);
+			sort(arr,mid+1,end);
+			merge(arr,start,mid,end);
+		}
+	}
+	
+	 public static void main(String[] args){
+		 int[] arr = new int[] {12,11,13,5,6,7};
+		 sort(arr,0,arr.length-1);
+		 for(int i:arr) {
+			 System.out.print(i+" ");
+		 }
+	 }
+}	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

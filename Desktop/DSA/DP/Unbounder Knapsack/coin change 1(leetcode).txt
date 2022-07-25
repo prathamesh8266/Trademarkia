@@ -1,0 +1,79 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+
+	public static void main(String args[]) {
+		int arr1[] = {1,2,3};
+        int n = arr1.length; 
+        int sum = 0;
+        for(int i=0;i<n;i++) {
+        	sum+=arr1[i];
+        }
+        System.out.println(coinChange(arr1,5));
+	}
+	
+	public static int coinChange(int[] coins, int amount) {
+	if(coins == null || coins.length == 0 || amount == 0)
+	    return 0;
+	 Integer[][] dp = new Integer[coins.length][amount + 1];
+	int result = util(coins,3,amount,dp);
+	return result == 10001?-1:result;
+	}
+	
+	private static int util(int[] coins,int index,int amount,Integer dp[][]){
+		
+		//////////////////////////////////////////// RECURSIVE APPROACH //////////////////////////////////
+		
+//	       //impossible to reach the required amount with this combo of coins
+//	       if(index >= coins.length && amount > 0)
+//	           return 10001;
+//	       //covering the other cases where we exceed max index + end case where
+//	       //we have our answer
+//	       if(index >= coins.length || amount == 0)
+//	           return 0;
+//	       
+//	       if(dp[index][amount] != null)
+//	           return dp[index][amount];
+//	       //The coins array isn't sorted, so if this index doesn't work, the upcoming ones might
+//	       if(coins[index] > amount)
+//	           return dp[index][amount] =  util(coins,index + 1,amount,dp);
+//	       //Either don't pick this coin, or pick it and count it as one. Reduce the amount by coin value. Knapsack logic.
+//	       return dp[index][amount] = Math.min( 1 + util(coins,index,amount - coins[index],dp),
+//	    		   util(coins,index + 1,amount,dp));
+		
+		////////////////////////////////////////// ITERATIVE APPROACH ////////////////////////////////
+		
+		int DP[][] = new int[index+1][amount+1];
+		for(int i=0;i<index+1;i++)
+			DP[i][0] = 0;
+		for(int j=1;j<amount+1;j++)
+			DP[0][j] = 10001;
+		for(int i=1;i<index+1;i++) {
+			for(int j=1;j<amount+1;j++) {
+				if(coins[i-1]>j)
+					DP[i][j] = DP[i-1][j];
+				else
+					DP[i][j]=Math.min(1+DP[i][j-coins[i-1]], DP[i-1][j]);
+			}
+		}
+		for(int i=0;i<index+1;i++) {
+			for(int j=0;j<amount+1;j++) {
+				System.out.print(DP[i][j]+" ");
+			}
+			System.out.println();
+		}
+		return 0;
+	}
+}
+	
+
+
+
+
+
+
+
+
+
+

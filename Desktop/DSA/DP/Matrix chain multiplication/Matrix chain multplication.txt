@@ -1,0 +1,51 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		int [][] dp = new int[4][4];
+		int arr[] = {1,2,3,4};
+		for(int [] a:dp)
+			Arrays.fill(a, -1);
+		System.out.println(mcm(arr,1,arr.length-1,dp));
+		for(int i=0;i<4;i++) {
+			for(int j=0;j<4;j++) {
+				System.out.print(dp[i][j]+" ");
+			}
+			System.out.println();
+		}
+	}
+	
+	static int mcm(int arr[],int start,int end,int[][] dp) {
+//		System.out.println(start+" "+end);
+		if(start>=end)
+			return 0;
+		
+		if(dp[start][end]!=-1)
+			return dp[start][end];
+		
+		int min = Integer.MAX_VALUE;
+		
+		for(int k=start;k<=end-1;k++) {
+			int temp = mcm(arr,start,k,dp)+mcm(arr,k+1,end,dp)+(arr[start-1]*arr[k]*arr[end]);
+			if(temp<min) {
+				min = temp;
+//				System.out.println(min);
+			}
+		}
+		return dp[start][end]= min;
+	}
+}
+	
+//  https://www.youtube.com/watch?v=_WncuhSJZyA
+//  https://www.youtube.com/watch?v=D1U74eFLg_g
+//  https://www.youtube.com/watch?v=HUIr6KfKM38
+
+
+
+
+
+
+
+

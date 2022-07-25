@@ -1,0 +1,29 @@
+package leetcode;
+import java.util.*;
+import java.util.Map.Entry;
+public class Solution {
+	
+	public static void main(String[] args) {
+		String s = "m";
+		palandrone(s,0,s.length()-1);
+		if(isPal) {
+			System.out.println("palandrome");
+		}else {
+			System.out.println("not palandrome");
+		}
+	}
+	
+	static boolean isPal = true;
+	
+	static void palandrone(String s,int l,int r) {
+		if(l>=r) {
+			return;
+		}
+		if(s.charAt(l)==s.charAt(r)) {
+			palandrone(s,l+1,r-1);
+		}else {
+			isPal = false;
+		}
+	}
+
+}

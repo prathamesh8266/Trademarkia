@@ -1,0 +1,78 @@
+package DSA;	
+import java.util.*;
+
+class Graph{
+	LinkedList<Integer> list[];
+	Graph(int vertices){
+		list = new LinkedList[vertices];
+		for(int i=0;i<vertices;i++) {
+			list[i] = new LinkedList<Integer>();
+		}
+	}
+	void addUndirectedEdge(int source,int destination) {
+		list[source].add(destination);
+		list[destination].add(source);
+	}
+	void addDirectedEdge(int source,int destination) {
+		list[source].add(destination);
+	}
+	int partsPresent(int length) {
+		Stack<Integer> s = new Stack<Integer>();
+		boolean vis[] = new boolean[length];
+		Arrays.fill(vis,false);
+		vis[0] = true;
+		int ptr = 0;
+		int count = 0;
+		while(ptr<length) {
+			System.out.println(ptr);
+			s.push(ptr);
+			while(!s.isEmpty()) {
+				int cur = s.pop();
+				for(int num: list[cur]) {
+					if(!vis[num]) {
+						s.push(num);
+						vis[num] = true;
+					}
+				}
+			}
+			count++;
+			while(ptr<length && vis[ptr]) {
+				ptr+=1;
+			}
+		}
+		return count;
+	}
+}
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 6;
+		Graph g = new Graph(n);
+		int n1 = 4;
+		for(int i=0;i<n1;i++) {
+			int src = sc.nextInt();
+			int dest = sc.nextInt();
+			g.addUndirectedEdge(src,dest);
+		}
+		System.out.println(g.partsPresent(6));
+	}
+}
+
+//// test case
+
+////   1 ----- 2     3--------4        6
+////						  |
+////						  |
+////						  |
+////						  |
+////						  5
+
+// 0 1
+// 2 3
+// 3 4
+// 5 5
+
+///   o/p === 3
+

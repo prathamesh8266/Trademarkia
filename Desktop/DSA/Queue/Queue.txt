@@ -1,0 +1,67 @@
+package oops;
+public class linkedlist {
+	static class Node{
+		Node next;
+		int data;
+		public Node(int data) {
+			this.data=data;
+			next=null;
+		}
+	}
+	
+	static class linklist{
+		Node head;
+		Node rear;
+		
+		public void add(int data) {
+		Node toAdd = new Node(data);
+		if(head==null) {
+			head=rear=toAdd;
+			return;
+		}
+		rear.next=toAdd;
+		rear=rear.next;
+//		System.out.println(head.data+" "+rear.data);
+		}
+		
+		int remove() {
+			if(head==null) {
+				rear = null;
+				return -1;
+			}
+			int temp = head.data;
+			head=head.next;
+			return temp;
+		}
+		
+		public void print() {
+			if(head == null ) {
+				System.out.println("null");
+				return;
+			}
+			if(head.next == null) {
+				System.out.println(head.data);
+			}
+			Node temp = head;
+			while(temp!=null) {
+				System.out.print(temp.data+" ");
+				temp=temp.next;
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		linklist ll = new linklist();
+		ll.add(0);
+		ll.add(1);
+		ll.add(2);
+		ll.add(3);
+		ll.add(4);
+		ll.add(5);
+		ll.add(6);
+		System.out.println(ll.remove());
+		System.out.println(ll.remove());
+		System.out.println("/////////////");
+		ll.print();
+	}
+}

@@ -1,0 +1,134 @@
+package DSA;
+import java.util.*;
+
+class UnDirectedGraph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+//		System.out.println("Enter the number of Edges: ");
+		int edge = sc.nextInt();
+//		System.out.println("Enter the number of vertices: ");
+		int vertice = sc.nextInt();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+			ar.get(b).add(a);
+		}
+	}
+}
+
+class UnDirectedWeightedGraph{
+	ArrayList<ArrayList<int[]>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+		int edge = sc.nextInt();
+		int vertice = sc.nextInt();
+		for(int i=0;i<=vertice;i++) {
+			ar.add(new ArrayList<int[]>());
+		}
+		for(int i=0;i<edge;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			int w = sc.nextInt();
+			ar.get(a).add(new int[] {b,w});
+			ar.get(b).add(new int[] {b,w});
+		}
+	}
+	
+	void print() {
+		for(int i=0;i<ar.size();i++) {
+			System.out.print(i+" ");
+			for(int j[] : ar.get(i)) {
+				System.out.print("{"+j[0]+","+j[1]+"}"+" ");
+			}
+			System.out.println();
+		}
+	}
+}
+
+class DirectedGraph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+		int edge = sc.nextInt();
+		int vertice = sc.nextInt();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+		}
+	}
+}
+
+class DirectedWeightedGraph{
+	ArrayList<ArrayList<int[]>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+		int edge = sc.nextInt();
+		int vertice = sc.nextInt();
+		for(int i=0;i<=vertice;i++) {
+			ar.add(new ArrayList<int[]>());
+		}
+		for(int i=0;i<edge;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			int w = sc.nextInt();
+			ar.get(a).add(new int[] {b,w});
+		}
+	}
+	void print() {
+		for(int i=0;i<ar.size();i++) {
+			System.out.print(i+" ");
+			for(int j[] : ar.get(i)) {
+				System.out.print("{"+j[0]+","+j[1]+"}"+" ");
+			}
+			System.out.println();
+		}
+	}
+}
+
+class node{
+	int val,wt;
+	node(int v,int w){
+		val = v;
+		wt = w;
+	}
+}
+
+class trees {
+	public static void main(String str[]) {
+		UnDirectedWeightedGraph udwg = new UnDirectedWeightedGraph();
+		udwg.construct();
+		dijkstra(udwg.ar,1);
+	}
+	
+	static void dijkstra(ArrayList<ArrayList<int[]>> ar,int src) {
+		PriorityQueue<node> pq = new PriorityQueue<>((a,b) -> a.wt-b.wt);
+		int par[] = new int[6];
+		Arrays.fill(par, Integer.MAX_VALUE);
+		par[src] = 0;
+		pq.offer(new node(src,0));
+		while(!pq.isEmpty()) {
+			node top = pq.poll();
+			for(int i[] : ar.get(top.val)) {
+				if(par[i[0]] > top.wt + i[1]) {
+					par[i[0]] = top.wt + i[1];
+					pq.offer(new node(i[0],par[i[0]]));
+				}
+			}
+		}
+		for(int i : par) {			
+			System.out.print(i+" ");
+		}
+	}
+	
+}
+
+

@@ -1,0 +1,82 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+
+	public static void main(String args[]) {
+		int arr1[] = {3,5,7,8,9,10,11};
+        int n = arr1.length; 
+        int sum = 0;
+        for(int i=0;i<n;i++) {
+        	sum+=arr1[i];
+        }
+        System.out.println(unBounded(arr1,n,n,500));
+	}
+
+
+	public static int unBounded(int[] coin,int n,int coins,int price){	
+		
+		//////////////////////////// RECURSICE APPROACH //////////////////////
+		
+//		System.out.println(price);
+//		if(price == 0)
+//			return 1;
+//		if(n == 0 || price < 0)
+//			return 0;
+//		if(coin[n-1]>price)
+//			return unBounded(coin,n-1,coins,price);
+//		else
+//			return unBounded(coin,n,coins,price-coin[n-1])+
+//					unBounded(coin,n-1,coins,price);
+		
+		
+		///////////////////////////// ITERATIVE APPROACH /////////////////////
+		
+		int dp[][] = new int[n+1][price+1];
+		for(int i=0;i<n+1;i++) {
+			dp[i][0] = 1;
+		}
+		for(int i=1;i<price+1;i++) {
+			dp[0][i] = 0;
+		}
+		for(int i=1;i<n+1;i++) {
+			for(int j=1;j<price+1;j++) {
+				if(coin[i-1]>j)
+					dp[i][j] = dp[i-1][j];
+				else
+					dp[i][j] = dp[i][j-coin[i-1]] + dp[i-1][j];
+			}
+		}
+		return dp[n][price];			
+	}
+}	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

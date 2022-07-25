@@ -1,0 +1,134 @@
+package DSA;	
+import java.util.*;
+
+// striver (take u forward) youtube
+class Node implements Comparator<Node>{
+	int data,weight;
+	Node(int d,int w){
+		data = d;
+		weight = w;
+	}
+	Node(){}
+	@Override
+	public int compare(Node o1, Node o2) {
+		if(o1.weight<o2.weight)
+			return -1;
+		if(o1.weight>o2.weight)
+			return 1;
+		return 0;
+	}
+}
+
+
+class Graph{
+//	ArrayList<Integer> adj[] = new ArrayList<>()[4];
+	ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+	Graph(int number){
+		for(int i=0;i<number;i++)
+			adj.add(new ArrayList<>());
+	}
+	
+	void addDirectedEdges(int source,int destination) {
+		adj.get(source).add(destination);
+//		adj[destination].add(source);
+	}
+}
+
+public class dsa{
+	static class Node{
+		int i,steps;
+		Node(int i,int s){
+			this.i = i;
+			steps = s;
+		}
+	}
+	
+	 static int getBoardValue(int[][] board, int num) {
+	        int n = board.length;
+	        int r = (num - 1) / n;
+	        int x = n - 1 - r;
+	        int y = r % 2 == 0 ? num - 1 - r * n : n + r * n - num;
+	        return board[x][y];
+	 }
+	
+	static int kosaraju(int V, ArrayList<ArrayList<Integer>> adj){
+		Stack<Integer> s = new Stack<Integer>();
+		boolean vis[] = new boolean[adj.size()];
+		toposort(0,adj,s,vis);
+		// step-2 transpose of a graph
+		ArrayList<ArrayList<Integer>> transpose = new ArrayList<>();
+		for(int i=0;i<adj.size();i++) {
+			transpose.add(new ArrayList<>());
+		}
+		
+		for(int i=0;i<adj.size();i++) {
+			vis[i]=false;
+			for(int num : adj.get(i)) {
+				transpose.get(num).add(i);
+			}
+		}
+		// step-3 Reverse DFS
+		while(!s.isEmpty()) {
+			int node = s.pop();
+			if(!vis[node]) {
+				finalList.add(revDfs(node,transpose,vis,new ArrayList<>()));
+			}
+		}
+//		System.out.println(finalList);
+		return finalList.size();
+    }
+	
+//	step-1
+	static void toposort(int i, ArrayList<ArrayList<Integer>> adj,Stack<Integer> s,boolean vis[]){
+		vis[i] = true;
+		for(int num : adj.get(i)) {
+			if(!vis[num]) {
+				toposort(num,adj,s,vis);
+			}
+		}
+		s.push(i);
+	}
+	
+	static ArrayList<ArrayList<Integer>> finalList = new ArrayList<>();
+	
+	static ArrayList<Integer> revDfs(int node,ArrayList<ArrayList<Integer>> transpose,boolean vis[],ArrayList<Integer> arr) {
+		vis[node] = true;
+		arr.add(node);
+		for(int i : transpose.get(node)) {
+			if(!vis[i])
+				revDfs(i,transpose,vis,arr);
+		}
+		return arr;
+	}
+	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 6;
+		Graph g = new Graph(n);
+		for(int i=0;i<7;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			g.addDirectedEdges(source, destination);
+		}
+//		System.out.println(kosaraju(n,g.adj));
+		System.out.println(kosaraju(n,g.adj));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

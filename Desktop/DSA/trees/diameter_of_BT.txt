@@ -1,0 +1,66 @@
+package DSA;
+import java.util.*;
+import java.util.Scanner;
+
+class Node{
+	int data;
+	Node left,right;
+	Node(int d){
+		data = d;
+	}
+}
+
+public class trees {
+	static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Node t = tree();
+
+		System.out.println(diameterOfBinaryTree(t));
+	}
+	
+	static Node tree() {
+		Node root = null;
+		
+		System.out.println("enter data:");
+		int d = sc.nextInt();
+		if(d == -1) return null;
+		
+		root = new Node(d);
+		System.out.println("enter left of "+d);
+		root.left = tree();
+		System.out.println("enter right of "+d);
+		root.right = tree();
+		
+		return root;
+	}
+	
+	static void print(Node root) {
+		System.out.println(root.data+" ");
+		if(root.left!=null) {
+			print(root.left);
+		}else return;
+		if(root.right!=null) {
+			print(root.right);
+		}else {
+			return;
+		}
+	}
+
+	public static  int res =Integer.MIN_VALUE;
+    public static int diameterOfBinaryTree(Node root) {
+      
+        solve(root);
+        return res+1;
+        
+    }
+    
+    public static int solve(Node root){
+        if(root == null) return 0;
+        
+        int l = solve(root.left);
+        int r =  solve(root.right);
+        res = Math.max(res, l+r);
+        return Math.max(l,r)+1;
+    }
+}

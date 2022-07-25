@@ -1,0 +1,61 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main (String[] args) {
+		runCustomerSimulation (2, "ABBAJJKZKZ");
+	}
+
+	static void runCustomerSimulation(int n, String seq){
+		int check[] = new int[256];
+		int count = 0;
+		int global = 0;
+		for(int i=0;i<seq.length();i++) {
+			char ch = seq.charAt(i);
+			if(check[ch] == 0) {
+				count+=1;
+				check[ch] = 1;
+				if(count > n) {
+					global++;
+				}
+				continue;
+			}else if(check[ch] == 1) {
+				count--;
+				check[ch]=0;
+			}			
+		}
+		System.out.println(global);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

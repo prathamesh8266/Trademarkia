@@ -1,0 +1,32 @@
+static int shortestPath(ArrayList<ArrayList<Integer>> ar,int target,int dest) {
+		boolean vis[] = new boolean[10];
+		int par[] = new int[10];
+		Queue<Integer> q = new LinkedList<>();
+		q.offer(target);
+		vis[target] = true;
+		par[target] = -1;
+		while(!q.isEmpty()) {
+			int top = q.poll();
+			for(int temp : ar.get(top)) {
+				if(!vis[temp]) {
+					par[temp] = top;
+					vis[temp] = true;
+					if(temp == dest) {
+						int minDist = getMin(par,dest);
+						return minDist;
+					}
+					q.offer(temp);
+				}		
+			}
+		}
+		return -1;
+	}
+	
+	static int getMin(int par[],int dest){
+		int count = 0;
+		while(par[dest] != -1) {
+			++count;
+			dest = par[dest];
+		}
+		return count;
+	}

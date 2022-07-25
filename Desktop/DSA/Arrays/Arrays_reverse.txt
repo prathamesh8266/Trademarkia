@@ -1,0 +1,63 @@
+package DSA;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		int[] arr = reverse(new int[] {1,2,3},0,2);
+		for(int a:arr) {
+			System.out.print(a+" ");
+		}
+	}
+	
+	static int[] reverse(int[] nums,int start,int end) {
+		if(start==end) {
+			return nums;
+		}
+		if(start<end) {
+			nums[start] = nums[start]^nums[end];
+			nums[end] = nums[start]^nums[end];
+			nums[start] = nums[start]^nums[end];
+		}
+		return reverse(nums,start+1,end-1);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

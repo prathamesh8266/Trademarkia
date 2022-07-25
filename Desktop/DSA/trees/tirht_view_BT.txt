@@ -1,0 +1,63 @@
+package DSA;
+import java.util.*;
+import java.util.Scanner;
+
+class Node{
+	int data;
+	Node left,right;
+	Node(int d){
+		data = d;
+	}
+}
+
+public class trees {
+	static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Node t = tree();
+		System.out.println(leftView(t));
+	}
+	
+	static Node tree() {
+		Node root = null;
+		System.out.println("Enter Node: ");
+		int n = sc.nextInt();
+		if(n == -1) return null;
+		root = new Node(n);
+		System.out.println("enter left of "+n);
+		root.left = tree();
+		System.out.println("enter right of "+n);
+		root.right = tree();
+		return root;
+	}
+	
+	static void preOrder(Node root) {
+		if(root == null) return;
+		System.out.println(root.data);
+		preOrder(root.left);
+		preOrder(root.right);
+		return;
+	}
+
+	static ArrayList<Integer> ar = new ArrayList<>();
+	static int max_level = 0;
+	static ArrayList<Integer> leftView(Node node)
+    {
+		return View(node,1);
+    }
+	static ArrayList<Integer> View(Node root,int level) {
+		
+		if(root == null) return ar;
+		
+		if(max_level < level) {
+			ar.add(root.data);
+			max_level = level;
+		}
+		
+		View(root.right,level+1);
+		View(root.left,level+1);
+		return ar;
+	}
+	
+}
+

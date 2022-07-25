@@ -1,0 +1,94 @@
+package DSA;	
+import java.util.*;
+
+
+class Node implements Comparator<Node>{
+	int data,weight;
+	Node(int d,int w){
+		data = d;
+		weight = w;
+	}
+	Node(){}
+	@Override
+	public int compare(Node o1, Node o2) {
+		if(o1.weight<o2.weight)
+			return -1;
+		if(o1.weight>o2.weight)
+			return 1;
+		return 0;
+	}
+}
+
+
+class Graph{
+	ArrayList<ArrayList<Node>> adj = new ArrayList<>();
+	
+	Graph(int n){
+		for(int i=0;i<n;i++) {
+			adj.add(new ArrayList<Node>());
+		}
+	}
+	
+	void addDirectedWeightedEdges(int source,int destination,int weight) {
+		adj.get(source).add(new Node(destination,weight));
+		adj.get(destination).add(new Node(source,weight));
+	}
+}
+
+public class dsa {
+	static void minSpan(ArrayList<ArrayList<Node>> adj,int N) {
+		PriorityQueue<Node> pq = new PriorityQueue<Node>(N,new Node());
+		int parent[] = new int[N];
+		Arrays.fill(parent, -1);
+		boolean vis[] = new boolean[N];
+		int wt[] = new int[N];
+		Arrays.fill(wt, Integer.MAX_VALUE);
+		pq.add(new Node(0,0));
+		wt[0] = 0;
+		vis[0] = true;
+		while(!pq.isEmpty()) {
+			Node node = pq.poll();
+			vis[node.data] = true;
+			for(Node cur : adj.get(node.data)) {
+				if((!vis[cur.data] && cur.weight < wt[cur.data])) {
+					wt[cur.data] = cur.weight;
+					parent[cur.data] = node.data;
+					pq.add(new Node(cur.data,cur.weight));
+				}
+			}
+		}
+		for(int i=0;i<N;i++) {
+			System.out.print(wt[i]+" ");
+		}
+	}
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 4;
+		Graph g = new Graph(n);
+		for(int i=0;i<5;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			int weight = sc.nextInt();
+			g.addDirectedWeightedEdges(source, destination,weight);
+		}
+		minSpan(g.adj,n);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,108 @@
+package DSA;	
+import java.util.*;
+
+class Graph{
+	LinkedList<Integer> list[];
+	Graph(int vertices){
+		list = new LinkedList[vertices];
+		for(int i=0;i<vertices;i++) {
+			list[i] = new LinkedList<Integer>();
+		}
+	}
+	void addUndirectedEdge(int source,int destination) {
+		list[source].add(destination);
+		list[destination].add(source);
+	}
+	void addDirectedEdge(int source,int destination) {
+		list[source].add(destination);
+	}
+	int largestpart(int length) {
+		Stack<Integer> s = new Stack<Integer>();
+		boolean vis[] = new boolean[length];
+		boolean cnt[] = new boolean[length];
+		int ptr = 0;
+		cnt[0] = vis[0] = true;
+		int gCounter = Integer.MIN_VALUE;
+		int global = 0;
+		while(ptr<length) {
+			s.push(ptr);
+			while(!s.isEmpty()) {
+				int cur = s.pop();
+				if(list[cur].size()!=0) {
+					for(int num: list[cur]) {
+						if(!vis[num]) {
+							cnt[num] = vis[num] = true;
+							s.push(num);
+						}
+					}
+				}else {
+					ptr++;
+				}
+			}
+			int count = 0;
+			for(int i=0;i<length;i++) {
+//				System.out.print(cnt[i]+" ");
+				if(cnt[i]==true)
+					count++;
+			}
+			if(count > gCounter)
+				gCounter = count;
+			Arrays.fill(cnt, false);
+//			System.out.println();
+			while(ptr<length && vis[ptr])
+				ptr++;
+		}
+		return gCounter;
+	}
+}
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 11;
+		Graph g = new Graph(n);
+		int n1 = 9;
+		for(int i=0;i<n1;i++) {
+			int src = sc.nextInt();
+			int dest = sc.nextInt();
+			g.addUndirectedEdge(src,dest);
+		}
+		System.out.println(g.largestpart(n));
+	}
+}
+
+
+
+//Test case
+//
+//	     2     4
+//	     |     |
+//	     |     |
+// 1-----0-----3-----5      8-------9
+//			   |					|
+//		      ---					|
+//		      | |					10
+//		      | |	
+//		      7 6
+
+// o/p = 8 as there are 8 vertices in largest subgraph 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

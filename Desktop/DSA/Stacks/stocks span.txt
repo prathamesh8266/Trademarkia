@@ -1,0 +1,90 @@
+package test;
+
+import java.util.*;
+
+// https://practice.geeksforgeeks.org/problems/stock-span-problem-1587115621/1
+
+public class Test {		
+    public static void main(String args[]){
+    	
+    	int arr[] = {100,80,60,70,60,75,85};
+    	int n = 7;
+    	for(int i : calculateSpan(arr,n)) {
+    		System.out.print(i+" ");
+    	}
+    }
+    static class Data{
+    	int data,index;
+    	Data(int d,int i){
+    		data = d;
+    		index = i;
+    	}
+    }
+    public static int[] calculateSpan(int price[], int n){  
+    	Stack<Data> s = new Stack<>();
+    	int i = 0;
+    	while(i < price.length) {
+    		while(!s.isEmpty()) {
+    			Data top = s.peek();
+    			if(top.data > price[i]) {
+    				s.push(new Data(price[i],i+1));
+    				price[i] = (i+1)-top.index;
+    				break;
+    			}else
+    				s.pop();
+    		}
+    		if(s.isEmpty()) {
+    			s.push(new Data(price[i],i+1));
+    			price[i] = i+1;
+    		}
+    		i++;
+    		
+    	}
+    	return price;
+    }
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

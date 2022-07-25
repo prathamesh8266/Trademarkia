@@ -1,0 +1,38 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		int arr = trappingWater(new int[] {1,1,5,2,7,6,1,4,2,3},10);
+		System.out.println(arr);
+	}
+	
+	static int trappingWater(int arr[], int n) { 
+        
+        int[] left = new int[n];
+        int[] right = new int[n];
+        int max = arr[0];
+        left[0]=arr[0];
+        for(int i=1;i<n;i++) {
+        	left[i] = (max=Math.max(max, arr[i]));
+        }
+        for(int i:left) {        	
+        	System.out.print(i+" ");
+        }
+        max = arr[n-1];
+        for(int i=n-1;i>=0;i--) {
+        	right[i] = (max=Math.max(max, arr[i]));
+        }
+        System.out.println();
+        for(int i:right) {        	
+        	System.out.print(i+" ");
+        }
+        int count=0;
+        for(int i=0;i<n;i++) {
+        	count += Math.min(left[i], right[i])-arr[i];
+        }
+        return count; 
+    } 
+}
+

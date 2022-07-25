@@ -1,0 +1,70 @@
+package test;
+
+public class Test {		
+	static class Node {
+        int data;
+        Node next;
+        Node prev;
+        Node(int d){
+        	data =d;
+        	next = null;
+        	prev = null;
+        }
+    };
+    
+    Node head = null;
+    
+     void add(int a) {
+    	if(head == null) {
+    		head = new Node(a);
+    	}else {
+    		Node temp = head;
+    		while(temp.next!=null) {
+    			temp = temp.next;
+    		}
+    		temp.next = new Node(a);
+    		temp.next.prev = temp;
+    	}
+    }
+    
+    static void print(Node head) {
+    	Node temp = head;
+    	while(temp!=null) {
+    		System.out.print(temp.data+" ");
+    		temp = temp.next;
+    	}
+    	 System.out.println();
+    }
+
+    public static void main(String args[])
+    {
+        Test t = new Test();
+        Node head = null;
+        t.add(1);
+        t.add(2);
+        t.add(4);
+        t.add(5);
+        t.add(6);
+        t.add(8);
+        t.add(9);
+        rotate(t.head,5);
+        print(t.head);    
+    }
+    
+    public static void rotate(Node  head,int a)
+    {
+    	for(int i=0;i<a;i++) {    		
+    		int d = head.data;
+    		Node ref = head;
+    		while(ref.next != null) ref = ref.next;
+    		shift(ref,ref.data);
+    		ref.data = d;
+    	}
+    }
+    public static void shift(Node n,int data) {
+    	if(n.prev == null) return;
+    	int temp = n.prev.data;
+    	n.prev.data = data;
+    	shift(n.prev,temp);
+    }
+}

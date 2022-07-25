@@ -1,0 +1,25 @@
+package leetcode;
+import java.util.*;
+import java.util.Map.Entry;
+public class Solution {
+	
+	public static void main(String[] args) {
+		int [] arr = {1,2,3};
+		powerSet(arr,0,new ArrayList<>());
+
+	}
+
+	static List<List<Integer>> li = new ArrayList<>();
+	
+	static void powerSet(int[] arr,int index,List cur) {
+		List li = new ArrayList(cur);
+		if(index==arr.length) {
+			System.out.println(li);
+			li.clear();     ////////// 	OPTIONAL  ////////////
+			return;
+		}
+		powerSet(arr,index+1,cur);
+		li.add(arr[index]);
+		powerSet(arr,index+1,li);
+ }
+}

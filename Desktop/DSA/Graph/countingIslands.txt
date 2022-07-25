@@ -1,0 +1,102 @@
+package DSA;	
+import java.util.*;
+
+// https://practice.geeksforgeeks.org/problems/find-the-number-of-islands/1#
+
+class Graph{
+	ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+	
+	Graph(int n){
+		for(int i=0;i<n;i++) {
+			adj.add(new ArrayList<Integer>());
+		}
+	}
+	
+	void addDirectedEdges(int source,int destination) {
+		adj.get(source).add(destination);
+	}
+}
+
+public class dsa {	
+	
+	static int numIslands(char[][] grid) {
+		int n = grid.length;
+		int m = grid[0].length;
+		int count = 0;
+		boolean vis[][] = new boolean[n+1][m+1];
+		Stack<Node> s = new Stack<Node>();
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<m;j++) {
+				if(grid[i][j] == '1' && vis[i][j] == false) {
+					count+=numIslandsUtil(grid,i,j,vis,s);
+				}
+			}
+		}
+		return count;	
+    }
+	
+	static int numIslandsUtil(char[][] grid,int i1,int j1,boolean[][] vis,Stack<Node> s) {
+		int n = grid.length;
+		int m = grid[0].length;
+		int utilI[] = {0,0,1,-1,1,1,-1,-1};
+		int utilJ[] = {1,-1,0,0,1,-1,-1,1};
+		s.push(new Node(i1,j1));
+		while(!s.isEmpty()) {
+			Node cur = s.pop();
+			if(!vis[cur.i][cur.j] && grid[cur.i][cur.j] == '1') {
+				vis[cur.i][cur.j] = true;
+				for(int i=0;i<8;i++) {
+					if(cur.i+utilI[i]<n && cur.i+utilI[i]>-1 && cur.j+utilJ[i]<m && cur.j+utilJ[i]>-1) {
+						s.push(new Node(cur.i+utilI[i],cur.j+utilJ[i]));
+					}
+				}
+			}
+		}
+//		for(int i=0;i<n;i++) {
+//			for(int j=0;j<m;j++) {
+//				System.out.print(vis[i][j]+ " ");
+//			}
+//			System.out.println();
+//		}
+		return 1;
+	}
+	
+	static class Node{
+		int i,j;
+		Node(int a,int b){
+			i = a;
+			j = b;
+		}
+	}
+	
+	public static void main(String args[]) {
+//		Scanner sc = new Scanner(System.in);
+//		int n = 11;
+//		Graph g = new Graph(n);
+//		for(int i=0;i<13;i++) {
+//			int source = sc.nextInt();
+//			int destination = sc.nextInt();
+//			g.addDirectedEdges(source, destination);
+//		}
+//		char grid[][] = {{'1','0','1','0','0','1','1','0','1'}};
+		char grid[][] = {{'0','1','1','1','0','0','0'},{'0','0','1','1','0','1','0'}};
+		System.out.println(numIslands(grid));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

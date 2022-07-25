@@ -1,0 +1,98 @@
+package DSA;
+import java.util.*;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		long inv = inversionCount(new long[] {10, 10, 10}, 5);
+		System.out.println(inv);
+	}
+	
+	static long inversionCount(long arr[], long N)
+    {
+       return mergeSort(arr,0,arr.length-1);
+    }
+	
+	static long mergeSort(long[] arr, int start , int end) {
+		long inv = 0;
+		if(start<end) {
+			int mid = (start+end)/2;
+			inv += mergeSort(arr , start , mid);
+			inv += mergeSort(arr,mid+1,end);
+			inv += merge(arr,start,mid,end);
+		}
+		return inv;
+	}
+	
+	static long merge(long arr[] , int start , int mid , int end) {
+		long inv = 0;
+		int sizeLeft = mid - start + 1;
+		int sizeRight = end - mid;
+		long leftArr[] = new long[sizeLeft];
+		long rightArr[] = new long[sizeRight];
+		for(int i=0;i<sizeLeft;i++) {
+			leftArr[i] = arr[start + i];
+		}
+		for(int i=0;i<sizeRight;i++) {
+			rightArr[i] = arr[mid + i + 1];
+		}
+		int i=0 , j=0 , k=start;
+		while(i<sizeRight && j<sizeRight) {
+			if(leftArr[i] <= rightArr[j]) {
+				arr[k] = leftArr[i];
+				i++;k++;
+			}
+			else {
+				arr[k] = rightArr[j];
+				inv += sizeLeft-i;  // to get all the valid inversions by getting the right side
+				k++;j++;
+			}
+		}
+		while(i<sizeLeft) {
+			arr[k] = leftArr[i];
+			i++;k++;
+		}
+		while(j<sizeRight) {
+			arr[k] = rightArr[j];
+			j++;k++;
+		}
+		return inv;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

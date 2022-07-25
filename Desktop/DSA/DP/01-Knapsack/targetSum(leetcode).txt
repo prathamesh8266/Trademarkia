@@ -1,0 +1,64 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+
+	public static void main(String args[]) {
+		int arr[] = {1,1,1,1};
+        int n = arr.length;
+        int sum = 0;
+        for(int i=0;i<n;i++) {
+        	sum+=arr[i];
+        }
+        targetSum(arr,2,0,0);
+        System.out.println(ans);
+	}
+
+	static int ans = 0;
+	static boolean findBool = true;
+	
+	public static void targetSum(int[] nums, int target, int i, int sum){		
+		 if(i >= nums.length) {
+	            if(target == sum)
+	                ans++;
+	            return;
+	        }
+	        
+	        int tempSum = sum;
+	        
+	        targetSum(nums, target, i + 1, tempSum + nums[i]);
+	        targetSum(nums, target, i + 1, tempSum - nums[i]);
+	        
+	        return;
+	}
+}	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

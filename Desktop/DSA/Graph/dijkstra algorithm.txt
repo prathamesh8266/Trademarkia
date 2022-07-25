@@ -1,0 +1,95 @@
+package DSA;	
+import java.util.*;
+
+class Node implements Comparator<Node>{
+	int v;
+	int weight;
+	Node(int  a,int b){
+		v = a;
+		weight = b;
+	}
+	Node(){};
+	int getV() { return v;}
+	int getWeight() {return weight;}
+	
+	@Override
+	public int compare(Node o1, Node o2) {
+		if(o1.weight<o2.weight)
+			return -1;
+		if(o1.weight>o2.weight)
+			return 1;
+		return 0;
+	}
+}
+
+class wGraph{
+	ArrayList<ArrayList<Node>> adj = new ArrayList<>();
+	
+	wGraph(int n){
+		for(int i=0;i<n;i++) {
+			adj.add(new ArrayList<Node>());
+		}
+	}
+	
+	void addWeightedGraph(int source,int destination,int weight) {
+		adj.get(source).add(new Node(destination,weight));
+		adj.get(destination).add(new Node(source,weight));
+	}
+}
+
+public class dsa {		
+	//////////////////////////////////// DIJKSTRA ALGORITHAM ////////////////////////////
+	static void shortestPath(int s,ArrayList<ArrayList<Node>> adj,int N) {
+		int dist[] = new int[N];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		dist[s] = 0;
+		PriorityQueue<Node> pq = new PriorityQueue<Node>(N,new Node());
+		pq.add(new Node(s,0));
+		
+		while(!pq.isEmpty()) {
+			Node cur = pq.poll();
+			for(Node node:adj.get(cur.getV())) {
+				if(dist[cur.getV()]+node.getWeight() < dist[node.getV()]) {
+					dist[node.getV()] = dist[cur.getV()]+node.getWeight();
+					pq.add(new Node(node.getV(),dist[cur.getV()]));
+				}
+			}
+		}
+		for(int i=0;i<N;i++) {
+			System.out.println(i+" -> "+dist[i]);
+		}
+	}
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 6;
+		wGraph g = new wGraph(n);
+		for(int i=0;i<6;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			int weight = sc.nextInt();
+			g.addWeightedGraph(source, destination, weight);
+		}
+		shortestPath(1,g.adj,n);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

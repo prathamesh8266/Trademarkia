@@ -1,0 +1,90 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main (String[] args) {
+		System.out.println(smallestWindow("timetopractice","toc"));
+	}
+	
+	public static String smallestWindow(String s, String p)
+    {
+		String str = "";
+		Map<Character,Integer> map2 = new HashMap<>();
+		Map<Character,Integer> map1 = new HashMap<>();
+		for(int i=0;i<p.length();i++) {
+			map2.put(p.charAt(i),map2.getOrDefault(p.charAt(i), 0)+1);
+		}
+		int i = -1;
+		int count = 0;
+		int j = -1;
+		while(true) {
+			boolean f1 = true;
+			boolean f2 = true;
+			// aquiring characters from end
+			while(j<s.length()-1 && count < p.length()) {
+				j++;
+				char ch = s.charAt(j);
+				map1.put(ch, map1.getOrDefault(ch, 0)+1);
+				if(map1.getOrDefault(ch,0) <= map2.getOrDefault(ch,0)) {
+					count++;
+				}
+				f1 = false;
+			}
+			// releasing characters from begining
+			while(i<j && count == p.length()) {
+				String local = s.substring(i+1,j+1);
+				if(str.length()==0 || local.length()<str.length()) {
+					str = local;
+				}
+				i++;
+				char ch = s.charAt(i);
+				if(map1.get(ch)==1) {
+					map1.remove(ch);
+				}else {
+					map1.put(ch,map1.get(ch)-1);
+				}
+				if(map1.getOrDefault(ch, 0)<map2.getOrDefault(ch, 0)) {
+					count--;
+				}
+				f2 = false;
+			}
+			if(f1&&f2) {
+				break;
+			}
+		}
+		if(str.length()==0) return "-1";
+		return str;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

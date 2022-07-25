@@ -1,0 +1,65 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		String str = "25525511135";
+		checkIP(str,0,new int[4],0);
+	}
+	
+	public static void checkIP(String s,int builderIndex,int[] path,int level) {
+		if(level == 4 && builderIndex == s.length()) {
+			System.out.println(path[0]+"."+path[1]+"."+path[2]+"."+path[3]);
+			return;
+		}else if(level == 4 || builderIndex == s.length()) {
+			return;
+		}
+		for(int i=1;i<=3 && builderIndex+i<=s.length();i++) {
+			String snapShot = s.substring(builderIndex,builderIndex+i);
+			int value = Integer.parseInt(snapShot);
+			if(value>255 || i>=2 && s.charAt(builderIndex)=='0') {
+				break;
+			}
+			path[level]=value;
+			checkIP(s,builderIndex+i,path,level+1);
+			path[level] = -1;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

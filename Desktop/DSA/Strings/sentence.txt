@@ -1,0 +1,46 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args){
+			String txt = "HELLO WORLD";
+			getChars(txt);
+		}
+		
+		public static void getChars(String str) {
+//			System.out.println("/////");
+			int[] arr = {2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,8,8,8,9,9,9,9};
+			System.out.println(arr.length);
+			int i = 0;
+			while(i<str.length()) {
+				int count = 1;
+				int ch = 0;
+				boolean gate = true;
+				if(str.charAt(i)==' ') {
+//					System.out.println("m in");
+					int m = i;
+					while(str.charAt(m)==str.charAt(m+1)) {
+						i++;
+						m++;
+						count++;
+						ch = 0;
+						gate = false;
+					}
+				}
+				else {					
+					int j = str.charAt(i)-'A';
+					ch = arr[j];
+					while(j>0 && arr[j]==arr[j-1]) {
+						count++;
+						j--;
+					}
+				}
+				for(int k=1;k<=count;k++) {
+					System.out.print(ch);
+				}
+				i++;
+			}
+		}
+		
+}

@@ -1,0 +1,49 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		int matrix[][] = {{1},{2},{3}};
+		System.out.println(searchMatrix(matrix,2));
+	}
+		
+	
+	 public static boolean searchMatrix(int[][] matrix, int target) {
+		 if(matrix.length==1) {
+		 for(int i=0;i<matrix[0].length;i++) {
+			 if(matrix[0][i]==target) {
+				 return true;
+			 }
+		 }
+	 }
+		 if(matrix.length==2) {
+			 for(int i=0;i<matrix[0].length;i++) {
+				 if(matrix[0][i]==target) {
+					 return true;
+				 }
+			 }
+			 for(int i=0;i<matrix[1].length;i++) {
+				 if(matrix[1][i]==target) {
+					 return true;
+				 }
+			 }
+		 }
+	        int start = 0;
+	        while(start<matrix.length) {
+	        	int len = matrix[start].length-1;
+	        	if(matrix[start][0]<=target && matrix[start][len]>=target) {
+	        		for(int i = 0;i<=len;i++) {
+	        			if(matrix[start][i] == target) {	        		
+	        				return true;
+	        			}	        			
+	        		}
+	        		start++;
+	        	}else {
+	        		start++;
+	        	}
+	        }
+	        return false;
+	 }
+}
+

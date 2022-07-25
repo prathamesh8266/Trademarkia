@@ -1,0 +1,26 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		String arr = isSubset(new long[] {11, 1, 13, 21, 3, 7},new long[] {11, 3, 7, 1},6,4);
+		System.out.println(arr);
+	}
+	
+	static String isSubset( long a1[], long a2[], long n, long m) {
+        Set<Long> set = new HashSet<>();
+        for(long a:a1){
+            set.add(a);
+        }
+        for(long a:a2){
+            if(set.contains(a)){
+                continue;
+            }else{
+                return "No";
+            }
+        }    
+        return "Yes";
+    }
+}
+

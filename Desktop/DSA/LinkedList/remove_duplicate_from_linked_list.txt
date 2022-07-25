@@ -1,0 +1,90 @@
+package DSA;
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class dsa {	
+	
+	static class Node{
+		int data;
+		Node next;
+		Node(int d){			
+			data = d;
+			next = null;
+		}
+	}
+	static class linkedList{
+		Node head;
+		void hardCode() {
+			head = new Node(1);
+			head.next = new Node(2);
+			head.next.next = new Node(2);
+			head.next.next.next = new Node(5);
+			head.next.next.next.next = new Node(5);
+			head.next.next.next.next.next = new Node(6);
+			head.next.next.next.next.next.next = new Node(7);
+		}
+		void print(Node head) {
+			Node temp = head;
+			while(temp!=null) {
+				System.out.print(temp.data+" ");
+				temp = temp.next;
+			}
+		}
+		 Node removeDuplicates(Node head){
+	        HashSet<Integer> set = new HashSet<>();
+	        Node ptr1 = head;
+	        Node ptr2 = head;
+	        set.add(ptr2.data);
+	        while(ptr2!=null) {
+	        	ptr2 = ptr2.next;
+	        	if(ptr2 == null) {
+	        		ptr1.next = ptr2;
+	        		break;
+	        	}
+	        	if(!set.contains(ptr2.data)) {
+	        		set.add(ptr2.data);
+	        		ptr1.next = ptr2;
+	        		ptr1 = ptr2;
+	        	}
+	        }
+	        return head;
+	    }
+	}
+	 public static void main(String[] args){
+		linkedList ll = new linkedList();
+		ll.hardCode();
+		ll.print(ll.removeDuplicates(ll.head));
+//		ll.print(ll.head);
+	 }
+  	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

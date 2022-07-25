@@ -1,0 +1,115 @@
+package Heaps;
+
+import java.util.*;
+
+//////////////////////////////////// MAX HEAP /////////////////////////////////// 
+
+public class heap {
+
+	public static void main(String[] args) {
+//		li.add(0);
+//		insert(10);
+//		insert(20);
+//		insert(15);
+//		insert(12);
+//		insert(100);
+//		System.out.println(li);
+//		delete();
+//		delete();
+//		delete();
+//		System.out.println(li);
+		li.add(0);
+		li.add(2);
+		li.add(10);
+//		li.add(30);
+		li.add(5);
+		li.add(50);
+		li.add(1);
+		heapSort(li,li.size());
+//		System.out.println(li);
+	}
+	
+	static List<Integer> li = new ArrayList<>();
+	
+	static void heapify(List<Integer> li,int n) {
+		while(n>0) {
+			int left = n*2;
+			int right = n*2+1;
+			int largest;
+			if(left>=li.size()) {
+				n--;
+				continue;
+			}
+			if(right>=li.size())
+				largest = left;
+			else
+				largest = li.get(left)>li.get(right)?left:right;
+			if(li.get(largest)>li.get(n)) {
+				swap(li,largest,n);
+				heapify(li,largest);
+			}
+			n--;
+		}
+		return;
+	}
+	
+	static void heapSort(List<Integer> li,int n) {
+		heapify(li,n/2);   ////////// first convert a array li to heap
+		List<Integer> sorted = new ArrayList<>();
+		///////// top of max heap exists a largest element ////////////////
+		while(li.size()>1) {
+			sorted.add(delete());	///// delete element one by one from max heap
+		}
+		System.out.println(sorted);
+	}
+	
+	static void insert(int a) {
+		li.add(a);
+		int n = li.size()-1;
+		int i = n;
+		while(i>1) {
+			int parent = i/2;
+			if(li.get(parent)<li.get(i)) {
+				li = swap(li,parent,i);
+				i = parent;
+			}
+			else
+				return;
+		}
+	}
+	
+	static int delete() {
+		if(li.size()>1) {
+			int largestElement = li.get(1);
+			li.set(1, li.get(li.size()-1));
+			li.remove(li.size()-1);
+			int i = 1;
+			while(i<li.size()) {
+				int left = i*2;
+				int right = i*2+1;
+				int largest;
+				if(left >= li.size())
+					break;
+				if(right>=li.size())
+					largest = left;
+				else
+					largest = li.get(left)>li.get(right)?left:right;
+				if(li.get(i)<li.get(largest)) {
+					swap(li,i,largest);
+					i = largest;
+				}else {
+					break;
+				}
+			}
+			return largestElement;
+		}
+		return 0;
+	}
+	
+	static List<Integer> swap(List<Integer> li,int a,int b) {
+		int temp = li.get(a);
+		li.set(a,li.get(b));
+		li.set(b, temp);
+		return li;
+	}
+}

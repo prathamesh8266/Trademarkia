@@ -1,0 +1,84 @@
+package DSA;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+//		int[] arr = sort(new int[] {0 ,2 ,1 ,2 ,0});
+		int[] arr = sort(new int[] {0 ,1 ,0,1,0,1,1,2,2,1,2,1,1,0,0,0});
+		for(int a:arr) {
+			System.out.print(a+" ");
+		}
+	}
+	
+	static int[] sort(int[] nums) {
+	int low = 0;
+	int mid = 0;
+	int high = nums.length-1;
+	while(mid<=high) {
+		if(nums[mid]==0) {
+			nums = swap(nums,mid,low);
+			low++;mid++;
+			continue;
+		}
+		if(nums[mid]==1) {
+			mid++;
+			continue;
+		}
+		if(nums[mid]==2) {	
+			if(mid >= high) {
+				break;
+			}
+				nums = swap(nums,mid,high);
+				high--;
+			}
+		}
+		for(int a:nums) {
+			System.out.print(a+" ");
+		}
+		System.out.println();
+		return nums;
+	}
+	
+	static int[] swap(int[] nums,int a,int b) {
+		nums[a] = nums[a]^nums[b];
+		nums[b] = nums[a]^nums[b];
+		nums[a] = nums[a]^nums[b];
+		return nums;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

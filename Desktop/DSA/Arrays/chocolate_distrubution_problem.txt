@@ -1,0 +1,35 @@
+package test;
+import java.util.*;
+
+public class Test {
+	//https://practice.geeksforgeeks.org/problems/chocolate-distribution-problem3825/1#
+	
+	public static void main(String[] args) {
+		List<Long> ar = new ArrayList<>();
+		ar.add((long) 7);
+		ar.add((long) 3);
+		ar.add((long) 2);
+		ar.add((long) 4);
+		ar.add((long)9);
+		ar.add((long)12);
+		ar.add((long)56);
+//		ar.add((long)12);
+		long arr = findMinDiff(ar,(long)7,(long)3);
+		System.out.println(arr);
+	}
+	
+	static public long findMinDiff (List<Long> ar, long n, long m)
+    {
+        Collections.sort(ar);
+        int start = 0;
+        int end = (int)m-1;
+        long loc = ar.get(end++)-ar.get(start++);
+        while(end<n){
+            long count = (ar.get(end)-ar.get(start));
+            loc = Math.min(loc,count);    
+            end++;start++;
+            }
+        return loc;
+    }
+}
+

@@ -1,0 +1,47 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		String s = "abbac";
+		int dp[][] = new int [10][10];
+		System.out.println(part(s,0,s.length()-1,dp));
+//		for(int i=0;i<4;i++) {
+//			for(int j=0;j<4;j++) {
+//				System.out.print(dp[i][j]+" ");
+//			}
+//			System.out.println();
+//		}
+	}
+	
+	static int part(String s,int i,int j,int[][] dp) {
+		if(i >= j || isPalandrome(s,i,j))
+			return 0;
+		int min = Integer.MAX_VALUE;
+		for(int k=i;k<=j-1;k++) {
+			int temp = part(s,i,k,dp)+part(s,k+1,j,dp)+1;
+			if(temp < min)
+				min = temp;
+		}
+		return min;
+	}
+	
+	static boolean isPalandrome(String s,int i,int j) {
+		while(i<=j) {
+			if(s.charAt(i)!=s.charAt(j)) {
+				return false;
+			}
+			i++;
+			j--;
+		}
+		return true;
+	}
+}
+	
+
+
+
+
+
+

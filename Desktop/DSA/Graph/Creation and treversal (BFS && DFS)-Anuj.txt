@@ -1,0 +1,115 @@
+package test;
+
+import java.util.*;
+
+class Graph{
+	 LinkedList<Integer> adj[];
+	
+	 Graph(int vertice) {
+		adj = new LinkedList[vertice];
+		for(int i=0;i<vertice;i++) {
+			adj[i] = new LinkedList<Integer>();
+		}
+	 }
+	 void addEdges(int source,int destination) {
+		adj[source].add(destination);
+		adj[destination].add(source);
+	 }
+	 
+	 //////////////////////////////// RECURSIVE DFS ////////////////////////////////
+	 
+	 boolean DFS(int source,int destination,boolean visited[]) {
+		 if(source == destination)
+			 return true;
+		 for(int num : adj[source]) {
+			 if(!visited[num]) {
+				 visited[num] = true;
+				 boolean temp = DFS(num,destination,visited);
+				 if(temp == true)
+					 return true;
+			 }
+		 }
+		 return false;
+	 }
+	 
+	 /////////////////////////////// DFS USING STACK /////////////////////////////////
+	 
+	 boolean DFS(int source,int destination,int edges) {
+		 boolean visited[] = new boolean[edges];
+		 boolean found = false;
+		 Stack<Integer> s = new Stack<Integer>();
+		 s.push(source);
+		 while(!s.isEmpty()) {
+			 int cur = s.pop();
+			 if(cur == destination) {
+				 found = true;
+				 break;
+			 }
+			 for(int num : adj[cur]) {
+				 if(!visited[num]) {
+					 visited[num] = true;
+					 s.push(num);
+				 }
+			 }
+		 }
+		 return found;
+	 }
+	 
+	 int BFS(int source,int destination) {
+		 Queue<Integer> q = new LinkedList<Integer>();
+		 boolean visited[] = new boolean[adj.length];
+		 int parent[] = new int[adj.length];
+		 
+		 q.add(source);
+		 parent[source] = -1;
+		 visited[source] = true;
+		 
+		 while(!q.isEmpty()) {
+			 int cur = q.poll();
+			 if(cur == destination) break;
+			 
+			 for(int neibour: adj[cur]) {
+				 if(!visited[neibour]) {
+					 visited[neibour] = true;
+					 q.add(neibour);
+					 parent[neibour] = cur;
+				 }
+			 }
+		 }
+		 int cur = destination;
+		 int dist = 0;
+		 while(parent[cur]!=-1) {
+			 System.out.print(cur+" -> ");
+			 cur = parent[cur];
+			 dist++;
+		 }
+		 return dist;
+	 }
+}
+
+public class Test {		
+    public static void main(String args[])
+    {
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("Enter the number of vertices: ");
+    	int vertice = sc.nextInt();
+    	Graph g = new Graph(vertice);
+    	System.out.println("Enter the number of edges: ");
+    	int edge = sc.nextInt();
+    	for(int i=0;i<edge;i++) {
+    		System.out.println("Enter source and destination: ");
+    		int source = sc.nextInt();
+    		int destination = sc.nextInt();
+    		g.addEdges(source, destination);
+    	}
+    	System.out.println("Enter source and destination: ");
+		int source = sc.nextInt();
+		int destination = sc.nextInt();
+		
+    	System.out.println(g.BFS(source, destination));
+    	System.out.println(g.DFS(source, destination, new boolean[5]));
+    	System.out.println(g.DFS(source, destination, edge));
+    }
+
+}
+	

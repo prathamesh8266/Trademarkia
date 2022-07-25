@@ -1,0 +1,130 @@
+package DSA;
+import java.util.*;
+import java.math.*;
+
+class Node{
+	Node a[] = new Node[26];
+	int end = 0, prefix = 0;
+	boolean flag = false;
+	
+	boolean contains(char ch) {
+		return a[ch-'a']!=null?true:false;
+	}
+	
+	void insert(char ch,Node n) {
+		a[ch-'a'] = n;
+	}
+	
+	Node get(char ch) {
+		return a[ch-'a'];
+	}
+	
+	void increaseEnd() {
+		end++;
+	}
+	
+	void increasePrefix() {
+		prefix++;
+	}
+	
+	void reduceEnd(){
+		end--;
+	}
+	
+	void reducePrefix() {
+		prefix--;
+	}
+	
+	int getEnd() {
+		return end;
+	}
+	
+	int getPrefix() {
+		return prefix;
+	}
+}
+
+class Trie{
+	Node head = new Node();
+	void add(String s) {
+		Node temp = head;
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(!temp.contains(ch)) {
+				temp.insert(ch,new Node());
+			}
+			temp = temp.get(ch);
+			temp.increasePrefix();
+		}
+		temp.increaseEnd();
+	}
+	
+	int countWordsStartingWith(String s) {
+		Node temp = head;
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(temp.contains(ch)) {
+				temp = temp.get(ch);
+			}else return 0;
+		}
+		return temp.getPrefix();
+	}
+	
+	void erase(String s) {
+		Node temp = head;
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(temp.contains(ch)) {	
+				temp = temp.get(ch);
+				temp.reducePrefix();
+			}else return;			
+		}
+		temp.reduceEnd();
+	}
+	
+	int countWordsEqualTo(String s) {
+		Node temp = head;
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(temp.contains(ch)) {				
+				temp = temp.get(ch);
+			}else {
+				return 0;
+			}
+		}
+		return temp.getEnd();
+	}
+}
+
+public class dsa{
+	
+	public static void main(String[] abcd){		
+		Trie t = new Trie();
+		t.add("apple");
+		t.add("apple");
+		t.add("mango");
+		t.erase("mango");
+		System.out.println(t.countWordsEqualTo("apple"));
+		System.out.println(t.countWordsEqualTo("mango"));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

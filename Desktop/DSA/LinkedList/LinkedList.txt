@@ -1,0 +1,91 @@
+package oops;
+
+public class linkedlist {
+	 static class Node{
+		 Node next;
+		 int data;
+		 public Node(int data) {
+			 this.data = data;
+			 next = null;
+		 }
+	 }
+	 
+	 static class linklist{
+		 Node head;
+		 void add(int data) {
+			 Node toAdd = new Node(data);
+			 if(head == null) {
+				 head = toAdd;
+				 return;
+			 }
+			 Node temp = head;
+			 while(temp.next!=null) {
+				 temp = temp.next;
+			 }
+			 temp.next = toAdd;
+		 }
+		 
+		 void print() {
+			 Node temp = head;
+			 if(temp==null) {
+				 System.out.println("null");
+				 return;
+			 }
+			 while(temp!=null) {
+				 System.out.println(temp.data);
+				 temp=temp.next;
+			 }
+		 }
+		 
+		 void clear() {
+			 head = null;
+		 }
+		 
+		 void size() {
+			 Node temp = head;
+			 int count=0;
+			 if(temp==null) {
+				 System.out.println(0);
+				 return;
+			 }
+			 while(temp!=null) {
+				 count+=1;
+				 temp=temp.next;
+			 }
+			 System.out.println(count);
+		 }
+		 
+		 boolean contains(int data) {
+			 Node temp = head;
+			 if(head.data == data) {
+				 return true;
+			 }
+			 else if(head==null) {
+				 return false;
+			 }
+			 while(temp!=null) {
+				 if(temp.data==data) {
+					 return true;
+				 }
+				 temp = temp.next;
+			 }
+			 return false;
+		 }
+	 }
+	
+	public static void main(String[] args) {
+		linklist ll = new linklist();
+		ll.add(0);
+		ll.add(1);
+		ll.add(2);
+		ll.add(3);
+		ll.add(4);
+		ll.add(5);
+		ll.add(6);
+		ll.add(7);
+		ll.size();
+		ll.print();
+		boolean cont = ll.contains(41);
+		System.out.println(cont);
+	}
+}

@@ -1,0 +1,39 @@
+package test;
+
+import java.util.*;
+
+public class Test {		
+    public static void main(String args[]){
+    	
+    	long arr[] = {7,8,1,4};
+    	int n = 4;
+    	for(long i : nextLargerElement(arr,n)) {
+    		System.out.print(i+" ");
+    	}
+    }
+    
+    public static long[] nextLargerElement(long[] arr, int n){    	
+    Stack<Long> s = new Stack<>();
+    int i = 0;
+    while(i<arr.length) {
+    	while(!s.isEmpty()) {
+    		long top = s.peek();
+    		if(top > arr[i]) {
+    			s.push(arr[i]);
+    			arr[i] = top;
+    			break;
+    		}else {
+    			s.pop();
+    		}
+    	}
+    	if(s.isEmpty()) {
+    		s.push(arr[i]);
+    		arr[i] = -1;
+    	}
+    	i++;
+    }
+    return arr;
+    	
+    } 
+}
+	

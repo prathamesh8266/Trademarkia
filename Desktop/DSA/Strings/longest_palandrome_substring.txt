@@ -1,0 +1,60 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args)
+		{
+		    String str = "abcdefghij";
+		    longestPalandrome(str);
+		}
+		
+		public static void longestPalandrome(String str) {	
+			int len = str.length();
+			int start = 0;
+			int end = 0;
+			int local = 0;
+			for(int i=0;i<len;i++) {
+				int len1 = checkPalan(str,i,i);
+				int len2 = checkPalan(str,i,i+1);
+				int l = Math.max(len1, len2);
+				if(l > local) {
+					local = l;
+					start = i-((l-1)/2);
+					end = i+(l/2);
+				}
+			}
+			System.out.println(str.substring(start,end+1));
+		}
+		
+		public static int checkPalan(String s,int i,int j) {
+			while(i>=0 && j<s.length() && s.charAt(i)==s.charAt(j)) {
+				i--;j++;
+			}
+			return j-i-1;
+		}
+		
+		/////////////////////// brute force
+		
+//		public static void longestPalandrome(String str) {
+//			String longest = "";
+//			int n = str.length();
+//			for(int i=0;i<n;i++) {
+//				for(int j=i;j<=n;j++) {
+//					String check = str.substring(i, j);
+//					
+////					System.out.println(check);
+//					String check2 = "";
+//					for(int k=check.length()-1;k>=0;k--) {
+//						check2+=check.charAt(k);
+//					}
+//					if(check2.endsWith(check)){
+//						if(check.length()>=longest.length()) {
+//							longest = check;
+//						}
+//					}
+//				}
+//			}
+//			System.out.println(longest);
+//		}
+}

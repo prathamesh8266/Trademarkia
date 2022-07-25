@@ -1,0 +1,57 @@
+https://www.codingninjas.com/codestudio/problems/complete-string_2687860?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_tries_videos&leftPanelTab=0
+
+class Node{
+    Node a[] = new Node[26];
+    boolean flag = false;
+    void insert(char ch){
+        a[ch-'a'] = new Node();
+    }
+    boolean contains(char ch){
+        return a[ch-'a'] == null ? false : true;
+    }
+    Node get(char ch){
+        return a[ch-'a'];
+    }
+}
+
+class Trie{
+    Node head = new Node();
+    void insert(String s){
+        Node temp = head;
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(!temp.contains(ch)){
+                temp.insert(ch);
+            }
+            temp = temp.get(ch);
+        }
+        temp.flag = true;
+    }
+    boolean contains(String s){
+        Node temp = head;
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            temp = temp.get(ch);
+            if(!temp.flag) return false;
+        }
+        return true;
+    }
+}
+
+class Solution {
+  public static String completeString(int n, String[] a) {
+      Trie t = new Trie();
+      for(int i=0;i<n;i++){
+          t.insert(a[i]);
+      }
+      String s = "";
+      for(int i=0;i<n;i++){
+          if(t.contains(a[i])){
+              if(a[i].length() >= s.length()){
+                  s = a[i];
+              }
+          }
+      }
+      return s == ""? "None" : s;
+  }
+}

@@ -1,0 +1,61 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main (String[] args) {		
+		System.out.println(countTriplets(new long[] {30,8,23,6,10,9,31,7,19,20,1,33,21,27,28,3,25,26},18,86));
+	}
+	
+	static long countTriplets(long arr[], int n,int sum){
+		Arrays.sort(arr);
+		for(long i:arr) {
+			System.out.print(i+" ");
+		}
+		long counter = 0;
+		for(int i=0;i<n-2;i++) {
+			int start = i+1;
+			int end = n-1;
+			while(start<end) {
+				long s = arr[i]+arr[start]+arr[end];
+				System.out.println(arr[i]+" "+arr[start]+" "+arr[end]);
+				if(s<sum) {
+					counter +=(end-start);
+					start++;
+				}else end--;
+			}
+		}
+		return counter;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

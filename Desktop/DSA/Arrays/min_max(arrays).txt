@@ -1,0 +1,65 @@
+package DSA;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		int[] arr = minMax(new int[] {1000, 11, 445, 1, 330, 3000});
+		for(int a:arr) {
+			System.out.print(a+" ");
+		}
+	}
+	
+	static int[] minMax(int[] nums) {
+		int small = nums[0];
+		int large = nums[0];
+		for(int i=1;i<nums.length;i++) {
+			if(nums[i]<small) {
+				small = nums[i];
+			}
+			if(nums[i]>large) {
+				large = nums[i];
+			}
+		}
+		return new int[] {small,large};
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

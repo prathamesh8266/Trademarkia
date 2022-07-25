@@ -1,0 +1,65 @@
+package DSA;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		System.out.println(findDuplicate(new int[] {2,2,2,2,2}));
+	}
+	public static int findDuplicate(int[] nums) {
+		int len = nums.length;
+		int duplicate = 0; 
+        for(int i=0;i<len;i++) {
+        	nums[nums[i]%len]+=len;
+        }
+        for(int i=0;i<len;i++) {
+        	if(nums[i]/len > 1) {
+        		duplicate = i;
+        	}
+        }
+        for(int i=0;i<len;i++) {
+        	nums[i]%=len;
+        }
+        return duplicate;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

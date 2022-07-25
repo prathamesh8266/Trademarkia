@@ -1,0 +1,121 @@
+package DSA;
+import java.util.*;
+
+class UnDirectedGraph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+//		System.out.println("Enter the number of Edges: ");
+		int edge = sc.nextInt();
+//		System.out.println("Enter the number of vertices: ");
+		int vertice = sc.nextInt();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+			ar.get(b).add(a);
+		}
+	}
+}
+
+class DirectedGraph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+//		System.out.println("Enter the number of Edges: ");
+		int edge = sc.nextInt();
+//		System.out.println("Enter the number of vertices: ");
+		int vertice = sc.nextInt();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+		}
+	}
+}
+
+class DirectedWeightedGraph{
+	ArrayList<ArrayList<int[]>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+		int edge = sc.nextInt();
+		int vertice = sc.nextInt();
+		for(int i=0;i<=vertice;i++) {
+			ar.add(new ArrayList<int[]>());
+		}
+		for(int i=0;i<edge;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			int w = sc.nextInt();
+			ar.get(a).add(new int[] {b,w});
+		}
+	}
+	void print() {
+		for(int i=0;i<ar.size();i++) {
+			System.out.print(i+" ");
+			for(int j[] : ar.get(i)) {
+				System.out.print("{"+j[0]+","+j[1]+"}"+" ");
+			}
+			System.out.println();
+		}
+	}
+}
+
+class trees {
+	public static void main(String str[]) {
+//		UnDirectedGraph udg = new UnDirectedGraph();
+//		udg.construct();
+		DirectedWeightedGraph dwg = new DirectedWeightedGraph();
+		dwg.construct();
+//		dwg.print();
+		boolean[] vis = new boolean[10];
+		vis[0] = true;
+		shortestPath(dwg.ar,0,3,0);
+		System.out.println(min);
+	}
+	
+	static int min = Integer.MAX_VALUE;
+	static boolean vis[] = new boolean[10];
+	static void shortestPath(ArrayList<ArrayList<int[]>> ar,int target,int dest,int temp) {
+		if(target == dest && min > temp) {
+			min = temp;
+			return;
+		}
+		
+		for(int i[] : ar.get(target)) {
+			if(!vis[i[0]]) {
+				vis[i[0]] = true;
+				shortestPath(ar,i[0],dest,temp+i[1]);
+				vis[i[0]] = false;
+			}
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

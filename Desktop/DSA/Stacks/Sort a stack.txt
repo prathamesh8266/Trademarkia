@@ -1,0 +1,59 @@
+package DSA;	
+import java.util.*;
+
+// https://www.geeksforgeeks.org/sort-a-stack-using-recursion/
+
+public class dsa{
+	
+	public static void main(String args[]) {
+
+		Stack<Integer> s = new Stack<>();
+		s.push(10);
+		s.push(5);
+		s.push(2);
+		s.push(1);
+		s.push(200);
+		StackSort(s);
+		while(!s.isEmpty()) {
+			System.out.println(s.pop());
+		}
+	}
+	
+	static void StackSort(Stack<Integer> s) {
+		if(!s.isEmpty()) {
+			int top = s.pop();
+			StackSort(s);
+			StackSortUtil(s,top);
+		}
+		return;
+	}
+	
+	static void StackSortUtil(Stack<Integer> s,int top) {
+		
+		if(s.isEmpty() || top > s.peek()) {
+			s.push(top);
+			return;
+		}
+		
+		int temp = s.pop();
+		StackSortUtil(s,top);
+		s.push(temp);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

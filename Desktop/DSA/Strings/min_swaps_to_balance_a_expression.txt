@@ -1,0 +1,41 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args){
+			String txt = "}{{}}{{{";
+			System.out.println(check(txt));
+		}
+		
+		public static int check(String expr) {
+			 int len = expr.length();
+			 
+			 if (len%2 != 0)
+			        return -1;
+			 int a=0;
+			 int b=0;
+			  Stack<Character> s=new Stack<>();			  
+			  for (int i=0; i<len; i++)
+		        {
+		            char c = expr.charAt(i);
+		            if(!s.isEmpty() && s.peek()=='{' && c=='}') {
+		            	s.pop();
+		            	a--;
+		            }
+		            else if(c=='{') {
+		            	s.push(c);
+		            	a++;
+		            }else {
+		            	s.push(c);
+		            	b++;
+		            }
+		        }		
+			  System.out.println(a+" "+b);
+			  if((a&1)==1) a=a/2+1;
+			  else a=a/2;
+			  if((b&1)==1) b=b/2+1;
+			  else b=b/2;
+			  return a+b;
+		}	
+}

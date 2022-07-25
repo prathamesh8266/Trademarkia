@@ -1,0 +1,62 @@
+package queue;
+
+import java.util.ArrayDeque;
+
+public class Queue {
+	public static class Node{
+		Node next, prev;
+		int data;
+		public Node(int data) {
+			this.data = data;
+			next=prev=null;
+		}
+	}
+	public static class Deque{
+		Node head;
+		Node tail;
+		void addFromLast(int data) {
+			Node toAdd = new Node(data);
+			if(head==null) {
+				head = tail = toAdd;
+				return;
+			}
+			Node temp = head;
+			while(temp.next!=null) {
+				temp=temp.next;
+			}
+			tail = temp.next = toAdd;
+			tail.prev=temp;
+			
+			System.out.println(tail.data+" "+head.data);
+		}
+		void removeFromHead() {
+			System.out.println(head.data);
+			head=head.next;
+		}
+		void removeFromTail() {
+			System.out.println(tail.data);
+			tail=tail.prev;
+		}
+		void print() {
+			Node temp = head;
+			while(temp!=tail.next) {
+				System.out.print(temp.data+" ");
+				temp=temp.next;
+			}
+		}
+	}
+	public static void main(String[] args) {
+		Deque d = new Deque();
+		d.addFromLast(0);
+		d.addFromLast(1);
+		d.addFromLast(2);
+		d.addFromLast(3);
+		d.addFromLast(4);
+		d.addFromLast(5);
+		d.addFromLast(6);
+		d.removeFromHead();
+		d.removeFromTail();
+		d.removeFromTail();
+		d.print();
+	}
+}

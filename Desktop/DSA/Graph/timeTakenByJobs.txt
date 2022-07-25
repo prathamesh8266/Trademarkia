@@ -1,0 +1,86 @@
+package DSA;	
+import java.util.*;
+
+class Graph{
+	ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+	
+	Graph(int n){
+		for(int i=0;i<n;i++) {
+			adj.add(new ArrayList<Integer>());
+		}
+	}
+	
+	void addDirectedEdges(int source,int destination) {
+		adj.get(source).add(destination);
+	}
+}
+
+public class dsa {	
+	
+	static class Node{
+		int num,time;
+		Node(int n,int t){
+			num = n;time =t;
+		}
+	}
+	
+	static void timeTaken(ArrayList<ArrayList<Integer>> adj,int n) {
+		int parent[] = new int[n];
+		Arrays.fill(parent, Integer.MIN_VALUE);
+		for(int i=1;i<n;i++) {
+			dfs(i,adj,parent);
+		}
+		for(int i:parent)
+			System.out.print(i+" ");
+	}
+	
+	static void dfs(int i,ArrayList<ArrayList<Integer>> adj,int parent[]) {
+		Stack<Node> s = new Stack<Node>();
+		s.push(new Node(i,1));
+		if(1>parent[i])
+			parent[i] = 1;
+		while(!s.isEmpty()) {
+			Node cur = s.pop();
+			for(int num : adj.get(cur.num)) {
+				if(parent[num] < cur.time+1) {
+					parent[num] = cur.time+1;
+				}
+				s.push(new Node(num,cur.time+1));
+			}
+		}
+	}
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 11;
+		Graph g = new Graph(n);
+		for(int i=0;i<13;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			g.addDirectedEdges(source, destination);
+		}
+		timeTaken(g.adj,11);
+	}
+}
+
+// test cases
+// https://www.geeksforgeeks.org/minimum-time-taken-by-each-job-to-be-completed-given-by-a-directed-acyclic-graph/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

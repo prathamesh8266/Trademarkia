@@ -1,0 +1,126 @@
+package DSA;
+
+class Node{
+	Node next;
+	int data;
+	Node(int data){
+		this.data = data;
+		next = null;
+	}
+}
+
+class linkedList{
+	Node head;
+	void add(int data) {
+		if(this.head == null) {
+			head = new Node(data);		
+		}else {
+			Node temp = head;
+			while(temp.next!=null) {
+				temp = temp.next;
+			}
+			temp.next = new Node(data);			
+		}
+	}
+}
+
+public class dsa {	
+	 public static void main(String[] args){
+		 Node n1 = new Node(1);
+			n1.next = new Node(3);
+			n1.next.next = new Node(5);
+			Node n2 = new Node(5);
+			n2.next = new Node(10);
+			Node n3 = new Node(7);
+			n3.next = new Node(18);
+			n3.next.next = new Node(20);
+			n1.next.next.next = n3;
+			n2.next = n3;
+		
+		print(n1);
+		System.out.println();
+		print(n2);
+		System.out.println();
+			System.out.println(c(n1,n2));
+	 } 
+	 
+	 public static void print(Node head) {
+		 Node temp = head;
+		 while(temp!=null) {
+			 System.out.print(temp.data+" ");
+			 temp = temp.next;
+		 }
+	 }
+	 
+	 public static int c(Node head1,Node head2) {
+		 Node temp1 = head1;
+		 Node temp2 = head2;
+		 int dat1=0,dat2=0,rem=0;
+		 while(temp1!=null) {
+			 dat1++;
+			 temp1 = temp1.next;
+		 }
+		 while(temp2!=null) {
+			 dat2++;
+			 temp2 = temp2.next;
+		 }
+		 if(dat1>=dat2) {
+			 rem = dat1-dat2;
+			 while(rem>0) {
+				 head1 = head1.next;
+				 rem--;
+			 }
+			 return i(head1,head2);
+		 }else {
+			 rem = dat2-dat1;
+			 while(rem>0) {
+				 head2 = head2.next;
+				 rem--;
+			 }
+			 return i(head1,head2);
+		 }
+	 }
+	 
+	 public static int i(Node head1,Node head2) {
+		 while(head1!=null) {
+			 if(head1 == head2) {
+				 return head1.data;
+			 }
+			 head1 = head1.next;
+			 head2 = head2.next;
+		 }
+		 return -1;
+	 }
+	 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

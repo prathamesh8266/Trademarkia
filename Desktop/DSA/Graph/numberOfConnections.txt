@@ -1,0 +1,94 @@
+package DSA;	
+import java.util.*;
+// https://leetcode.com/problems/number-of-operations-to-make-network-connected/submissions/
+
+class Graph{
+	LinkedList<Integer> list[];
+	Graph(int vertices){
+		list = new LinkedList[vertices];
+		for(int i=0;i<vertices;i++) {
+			list[i] = new LinkedList<Integer>();
+		}
+	}
+	void addUndirectedEdge(int source,int destination) {
+		list[source].add(destination);
+		list[destination].add(source);
+	}
+	
+	void addDirectedEdge(int source,int destination) {
+		list[source].add(destination);
+	}
+}
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+//		int n = 5;
+//		Graph g = new Graph(n);
+//		int n1 = 5;
+//		for(int i=0;i<n1;i++) {
+//			int src = sc.nextInt();
+//			int dest = sc.nextInt();
+//			g.addUndirectedEdge(src,dest);
+//		}
+//		int image[][] = {{1,1,1},{1,1,0},{1,0,1}};
+	}
+	
+	 public int makeConnected(int n, int[][] connections) {
+		 List<List<Integer>> nodes = new ArrayList<>();
+		        for(int i = 0; i < n; i++)
+		            nodes.add(new ArrayList<>());
+		        for(int i = 0; i < connections.length; i++){
+		            nodes.get(connections[i][0]).add(connections[i][1]);
+		            nodes.get(connections[i][1]).add(connections[i][0]);
+		        }
+		        boolean[] vis = new boolean[n];
+		        int comp = 0;
+		        for(int i = 0; i < n; i++){
+		            if(vis[i] == false){
+		                comp++;
+		                dfs(i, nodes, vis);
+		            }
+		        }
+		        if(n > connections.length + 1)
+		            return -1;
+		        else
+		            return comp - 1;
+		    }
+		    
+		    public void dfs(int n, List<List<Integer>> nodes, boolean[] vis){
+		        vis[n] = true;
+		        for(int nbrs : nodes.get(n)){
+		            if(vis[nbrs] == false)
+		                dfs(nbrs, nodes, vis);
+		        }
+		    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

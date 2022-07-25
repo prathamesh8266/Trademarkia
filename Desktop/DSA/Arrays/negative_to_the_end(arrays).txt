@@ -1,0 +1,80 @@
+package DSA;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+//		int[] arr = negEle(new int[] {-1, 2, -3});
+		int[] arr = negEle(new int[] {-12, 11, -13, -5,6, -7, 5, -3, 11 });
+
+		for(int a:arr) {
+			System.out.print(a+" ");
+		}
+	}
+	
+	static int[] negEle(int[] nums) {
+		int ind = 0;
+		for(int i=0;i<nums.length;i++) {
+			if(nums[i]<0) {
+			if(ind==i) {
+				ind++;
+				continue;
+			}else {
+				nums = swap(nums,ind,i);
+				ind++;
+			}	
+			}
+			for(int j:nums) {
+				System.out.print(j+" ");
+			}
+			System.out.println();
+		}
+		return nums;
+	}
+	
+	static int[] swap(int[] nums,int a,int b) {
+		nums[b]=nums[a]^nums[b];
+		nums[a]=nums[a]^nums[b];
+		nums[b]=nums[a]^nums[b];
+		return nums;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

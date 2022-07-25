@@ -1,0 +1,79 @@
+package DSA;	
+import java.util.*;
+
+class Node{
+	int data,weight,maxW=0;
+	Node(int d,int wgt){
+		data = d;
+		weight = wgt;
+	}
+}
+
+class Graph{
+	ArrayList<ArrayList<Node>> adj = new ArrayList<>();
+	Graph(int number){
+		for(int i=0;i<number;i++)
+			adj.add(new ArrayList<>());
+	}
+	
+	void addUndirectedEdges(int source,int destination,int weight) {
+		adj.get(source).add(new Node(destination,weight));
+//		adj.get(destination).add(new Node(source,weight));
+	}
+}
+
+public class dsa{
+	
+	static int longestPath(ArrayList<ArrayList<Node>> adj,int n) {
+		int maxVal[] = new int[n];
+		Stack<Node> s = new Stack<>();
+		s.push(new Node(0,0));
+		while(!s.isEmpty()) {
+			Node prev = s.pop();
+			for(Node node : adj.get(prev.data)) {
+				if(maxVal[node.data] < node.weight + prev.maxW) {
+//					System.out.println(node.data+" "+" "+node.weight+" "+maxVal[node.data]);
+					maxVal[node.data] = node.weight + maxVal[prev.data];
+//					System.out.println(node.data+" "+" "+node.weight+" "+maxVal[node.data]+"//////");
+				}
+				s.push(new Node(node.data,node.weight));
+			}
+		}
+		int wt = Integer.MIN_VALUE;
+		for(int i=0;i<n;i++) {
+				if(maxVal[i] > wt)
+					wt = maxVal[i];
+		}
+		return wt;
+	}
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 6;
+		Graph g = new Graph(n);
+		for(int i=0;i<7;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			int weight = sc.nextInt();
+			g.addUndirectedEdges(source, destination,weight);
+		}				
+		System.out.println(longestPath(g.adj,n));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

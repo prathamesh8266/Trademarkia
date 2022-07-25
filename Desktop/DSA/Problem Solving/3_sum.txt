@@ -1,0 +1,50 @@
+package leetcode;
+import java.util.*;
+import java.util.Map.Entry;
+public class Solution {
+	
+	 public static void main(String[] args){
+		System.out.println(threeSum(new int[] {-1,0,1,2,-1,-4}));
+		 System.out.println(threeSum(new int[] {-1,0,1}));
+		 System.out.println(threeSum(new int[] {0,0,0}));
+		 System.out.println(threeSum(new int[] {0}));
+		 System.out.println(threeSum(new int[] {}));
+	 }
+	 
+	 static List<List<Integer>> threeSum(int[] nums) {
+		 Map<Integer,Integer> map = new HashMap<>();
+		 List<List<Integer>> list = new ArrayList<>();
+		 if(nums.length<2) {
+			 return list;
+		 }
+	        int length = nums.length;
+	        Arrays.sort(nums);
+	        for(int a:nums) {
+	        	System.out.print(a+" ");
+	        }
+	        System.out.println();
+	        for(int i=0;i<length-2;i++) {
+	        	if(i==0 || (i>0 && nums[i]!=nums[i-1])) {	        		
+	        		int start = i+1;
+	        		int end = length-1;
+	        		int num = -nums[i];
+	        		while(start<end) {
+	        			int sum = nums[start]+nums[end];
+	        			if(sum == num) {
+	        				list.add(Arrays.asList(nums[i],nums[start],nums[end]));	        				
+	        				while(start<end && nums[start]==nums[start+1]) start++;
+	        				while(start<end && nums[end] == nums[end-1]) end--;
+	        				start++;
+	        				end--;
+	        			}else if(num>sum){
+	        				start++;
+	        			}else {
+	        				end--;
+	        			}
+	        		}
+	        	}
+	        }
+	        return list;
+	    
+	 }
+}

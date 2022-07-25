@@ -1,0 +1,29 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		System.out.println(sb(new int[] {1, 10, 5, 2, 7},5,9));
+		System.out.println(sb(new int[] {1, 4, 45, 6, 0, 19},6,51));
+	}
+	
+	public static int sb(int a[], int n, int x) {
+       int mi = Integer.MAX_VALUE;
+       int i = 0;
+       int j = 0;
+       int s = 0;
+       while(i<=j && j<n) {
+    	   while(s<=x && j<n) {
+    		   s += a[j++];
+    	   }
+    	   while(s>x && i<j) {
+    		   mi = Math.min(mi, j-i);
+    		   s -= a[i];
+    		   i++;
+    	   }
+       }
+       return mi;
+    }
+}
+

@@ -1,0 +1,88 @@
+import java.lang.reflect.Array;
+import java.util.*;
+
+public class DSA {
+
+    static class Node {
+        Node left, right;
+        int data;
+        Node(int d) {
+            data = d;
+            left = null;
+            right = null;
+        }
+    }
+
+    static Scanner sc = new Scanner(System.in);
+
+    public static Node tree() {
+        Node node = null;
+        int a = sc.nextInt();
+        if (a == -1) return null;
+        else node = new Node(a);
+        node.left = tree();
+        node.right = tree();
+        return node;
+    }
+
+
+    static void print(Node node) {
+        if (node == null) return;
+        print(node.left);
+        System.out.print(node.data + " ");
+        print(node.right);
+        return;
+    }
+
+    public static void main(String[] args) {
+//        Node t = tree();
+        int inorder[] = {3 ,1 ,4 ,0 ,5 ,2};
+        int preorder[] = {0 ,1 ,3 ,4 ,2 ,5};
+        for(int i = 0; i < inorder.length; i++)
+        {
+            mp.put(inorder[i], i);
+        }
+        print(buildTree(inorder,preorder,0,inorder.length-1));
+    }
+    static HashMap<Integer,Integer> mp = new HashMap<>();
+    static int preIndex = 0;
+    public static Node buildTree(int[] in, int[] pre, int start, int end)
+    {
+        if(start > end){
+            return null;
+        }
+        Node node = new Node(pre[preIndex++]);
+        if(start == end){
+            return node;
+        }
+        int ind = mp.get(node.data);
+        node.left = buildTree(in,pre,start,ind-1);
+        node.right = buildTree(in,pre,ind+1,end);
+        return node;
+    }
+
+//    static int preIndex = 0;
+//    /////////////////////////// O(n*n) time
+//    static Node buildTree(int in[], int pre[], int start, int end)
+//    {
+//        if(start > end) return null;
+//        Node node = new Node(pre[preIndex++]);
+//        if(start == end) return node;
+//        int ind = search(in,start,end,node.data);
+//
+//        node.left = buildTree(in,pre,start,ind-1);
+//        node.right = buildTree(in,pre,ind+1,end);
+//        return node;
+//    }
+//
+//    static int search(int arr[], int start, int end, int value)
+//    {
+//        int i;
+//        for (i = start; i <= end; i++) {
+//            if (arr[i] == value)
+//                return i;
+//        }
+//        return i;
+//    }
+
+}

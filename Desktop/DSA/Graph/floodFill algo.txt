@@ -1,0 +1,129 @@
+package DSA;	
+import java.util.*;
+
+class Graph{
+	LinkedList<Integer> list[];
+	Graph(int vertices){
+		list = new LinkedList[vertices];
+		for(int i=0;i<vertices;i++) {
+			list[i] = new LinkedList<Integer>();
+		}
+	}
+	void addUndirectedEdge(int source,int destination) {
+		list[source].add(destination);
+		list[destination].add(source);
+	}
+	
+	void addDirectedEdge(int source,int destination) {
+		list[source].add(destination);
+	}
+}
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+//		int n = 5;
+//		Graph g = new Graph(n);
+//		int n1 = 5;
+//		for(int i=0;i<n1;i++) {
+//			int src = sc.nextInt();
+//			int dest = sc.nextInt();
+//			g.addUndirectedEdge(src,dest);
+//		}
+//		int image[][] = {{1,1,1},{1,1,0},{1,0,1}};
+		int image[][] = {{0,0,0},{0,0,0}};
+		int a[][] = floodFillUtil(image,0,0,2);
+		for(int i[]:a) {
+			System.out.println();
+			for(int j:i)
+				System.out.print(j+" ");
+		}
+	}
+	static int a = 0;
+	static int[][] floodFillUtil(int[][] image,int i,int j,int newColor) {
+		a = image[i][j];
+		return floodFill(image,i,j,newColor,a);
+	}
+	 static int[][] floodFill(int[][] image, int i, int j, int newColor,int col) {
+//	        int n = image.length;
+//	        int m = image[0].length;
+//	        if(i>=n || j>=m || j<0 || i<0){
+//	            return image;
+//	        }
+//	        if(image[i][j] == newColor)
+//	        	return image;
+//	        image[i][j] = newColor;
+//	        if(i+1<n && image[i+1][j] == a) {	        	
+//	        	floodFill(image,i+1,j,newColor,a);
+//	        }
+//	        if(j+1<m && image[i][j+1] == a) {
+//		         floodFill(image,i,j+1,newColor,a);
+//	         }
+//	         if(i-1>=0 && image[i-1][j] == a){
+//		        floodFill(image,i-1,j,newColor,a);
+//	         }         
+//	         if(j-1>=0 && image[i][j-1] == a) {
+//		         floodFill(image,i,j-1,newColor,a);
+//	         }
+//	        return image;
+		 
+		 /////////////////////////////////// Using Graph ////////////////////////////////
+		 ////////////////////// TLE coming here /////////////////
+		 
+		 Stack<int[]> s = new Stack<>();
+		 s.push(new int[] {i,j});
+		 int prevCol = image[i][j];
+		 int r = image.length;
+		 int c = image[0].length;
+		 image[i][j] = newColor;
+		 while(!s.isEmpty()) {
+			 int a[] = s.pop();
+			 System.out.println(a[0]+" "+a[1]);
+			 if(a[0]+1<r && image[a[0]+1][a[1]]==prevCol) {
+				 image[a[0]+1][a[1]] = newColor;
+				 s.push(new int[] {a[0]+1,a[1]});
+			 }
+			 if(a[1]+1<c && image[a[0]][a[1]+1]==prevCol) {
+				 image[a[0]][a[1]+1] = newColor;
+				 s.push(new int[] {a[0],a[1]+1});
+			 }
+			 if(a[0]-1>=0 && image[a[0]-1][a[1]]==prevCol) {
+				 image[a[0]-1][a[1]] = newColor;
+				 s.push(new int[] {a[0]-1,a[1]});
+			 }
+			 if(a[1]-1>=0 && image[a[0]][a[1]-1]==prevCol) {
+				 image[a[0]][a[1]-1] = newColor;
+				 s.push(new int[] {a[0],a[1]-1});
+			 }
+		 }
+		 return image;
+	    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

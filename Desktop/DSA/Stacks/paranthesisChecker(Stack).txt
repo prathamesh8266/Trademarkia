@@ -1,0 +1,52 @@
+package oops;
+
+import java.util.Stack;
+
+public class linkedlist {
+	
+	public static void main(String[] args) {
+	String p = "{[{}[]]}";
+	char openCurly = '{';
+	char closeCurly = '}';
+	char openSquare = '[';
+	char closeSquare = ']';
+	char openParant = '(';
+	char closeParant =')';
+	int l = p.length();
+	Stack<Character> st = new Stack<>();
+	for(int i=0;i<l;i++) {
+		char s = p.charAt(i);
+		if(s==openCurly || s==openSquare || s==openParant) {
+			st.push(s);
+		}else if(s==closeCurly) {
+			if(st.isEmpty()) {
+				st.push(s);
+			}
+			if(st.peek()==openCurly) {
+				st.pop();
+			}
+		}
+		else if(s==closeSquare) {
+			if(st.isEmpty()) {
+				st.push(s);
+			}
+			if(st.peek()==openSquare) {
+				st.pop();
+			}
+		}
+		else if(s==closeParant) {
+			if(st.isEmpty()) {
+				st.push(s);
+			}
+			if(st.peek()==openParant) {
+				st.pop();
+			}
+		}
+	}
+	if(st.isEmpty()) {
+		System.out.println("BALANCED");
+	}else {
+		System.out.println("NOT BALANCED");
+	}
+	}
+}

@@ -1,0 +1,128 @@
+package test;
+
+public class Test {		
+	static class Node {
+        int data;
+        Node next;
+//        Node prev;
+//        Node(){
+//        	data = 0;
+//        	next = null;
+//        }
+        Node(int d){
+        	data =d;
+        	next = null;
+//        	prev = null;
+        }
+    };
+    
+    Node head = null;
+    
+     void add(int a) {
+    	if(head == null) {
+    		head = new Node(a);
+    	}else {
+    		Node temp = head;
+    		while(temp.next!=null) {
+    			temp = temp.next;
+    		}
+    		temp.next = new Node(a);
+//    		temp.next.prev = temp;
+    	}
+    }
+    
+    static void print(Node head) {
+    	Node temp = head;
+    	while(temp!=null) {
+    		System.out.print(temp.data+" ");
+    		temp = temp.next;
+    	}
+    	 System.out.println();
+    }
+
+    public static void main(String args[])
+    {
+        Test t = new Test();
+        Node head = null;
+        t.add(1);
+        t.add(2);
+        t.add(3);
+        Test t1 = new Test();
+        t1.add(4);
+        t1.add(5);
+        Test t2 = new Test();
+        t2.add(5);
+        t2.add(6);
+        Test t3 = new Test();
+        t3.add(7);
+        t3.add(8);
+        Node[] arr = {t.head,t1.head,t2.head,t3.head};
+        mergeKList(arr,4);
+    }
+    
+    static Node mergeKList(Node[]arr,int K)
+    {
+    	Node a = arr[0];
+    	int i = 1;
+    	Node head = a;
+        while(i<arr.length) {
+        	head = merge(head,arr[i]);
+        	i++;
+        }
+        print(head);
+        return head;
+    }
+    
+   static Node merge(Node a,Node b) {
+	   print(a);
+	   print(b);
+	   Node head = null;
+	   if(a.data < b.data) {		   
+		   head = new Node(a.data);
+	   }else {
+		   head = new Node(b.data);
+	   }
+	   Node temp = head;
+	   Node ptr1 = a,ptr2 = b;
+	   while(a!=null && b!=null) {
+		   if(b.data >= a.data) {
+			  temp.data = a.data;
+			  temp.next = new Node(0);
+			  temp = temp.next;
+			  a = a.next;
+			  continue;
+		   }
+		   if(a.data > b.data) {
+			   	  temp.data = b.data;
+				  temp.next = new Node(0);
+				  temp = temp.next;
+				  b = b.next;
+				  continue;
+		   }
+	   }
+	   if(a == null) {
+		   while(b != null) {
+			   System.out.println(temp.data);
+			   temp.data = b.data;
+			   temp.next = new Node(0);
+			   temp = temp.next;
+			   b = b.next;
+		   }
+	   }
+	   if(b == null) {
+		   while(a != null) {
+			   temp.data = a.data;
+			   temp.next = new Node(0);
+			   a = a.next;
+			   temp = temp.next;
+		   }
+	   }
+	   temp = head;
+	   while(temp.next.next != null) {
+		   temp = temp.next;
+	   }
+	   temp.next = null;
+//	   System.out.println(head);
+	   return head;
+   }
+}

@@ -1,0 +1,48 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	 public static void main (String[] args)
+	    {
+	        int N = 4;
+	 
+	        int mat[][] = {
+	        		{1 ,2 ,3 ,4},
+	        		{5, 6, 7 ,8},
+	        		{9, 10, 11, 12},
+	        		{13, 14, 15, 16}};
+//	        int mat[][] = {
+//	        		{1 ,2 ,3},
+//	        		{4,5, 6},
+//	        		{ 7 ,8,9}};
+	 
+	        matrixRotate(mat,N,N);
+	  }
+	 
+	 static void matrixRotate(int mat[][],int ro,int co) {
+		 for(int i=0;i<ro;i++) {
+			 for(int j=i+1;j<co;j++) {
+				 int temp = mat[i][j];
+				 mat[i][j] = mat[j][i];
+				 mat[j][i] = temp;
+			 }
+		 }
+		 for(int i=0;i<ro;i++) {
+			 for(int j=0;j<co/2;j++) {
+				 int temp = mat[i][j];
+				 mat[i][j] = mat[i][co-j-1];
+				 mat[i][co-1-j] = temp;
+			 }
+		 }
+
+	   for(int[] a:mat) {
+		   for(int b:a) {
+			   System.out.print(b+" ");
+		   }
+		   System.out.println();
+	   }
+	 }
+}
+
+

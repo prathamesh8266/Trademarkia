@@ -1,0 +1,88 @@
+package DSA;
+import java.util.*;
+import java.math.*;
+
+class Node{
+	Node a[] = new Node[26];
+	boolean flag = false;
+	
+	boolean contains(char ch) {
+		return a[ch-'a']!=null?true:false;
+	}
+	
+	void insert(char ch,Node n) {
+		a[ch-'a'] = n;
+	}
+	
+	Node get(char ch) {
+		return a[ch-'a'];
+	}
+}
+
+class Trie{
+	Node head = new Node();
+	void add(String s) {
+		Node temp = head;
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(!temp.contains(ch)) {
+				temp.insert(ch,new Node());
+			}
+			temp = temp.get(ch);
+		}
+		temp.flag = true;
+	}
+	
+	void search(String s) {
+		Node temp = head;
+		for(int i=0;i<s.length();i++) {
+			char ch = s.charAt(i);
+			if(temp.contains(ch)) {
+				temp = temp.get(ch);
+			}else {
+				System.out.println(false);
+			}
+		}
+		System.out.println(temp.flag);
+	}
+	
+	void print(Node head) {
+		if(!head.flag) return;
+		for(int i=0;i<26;i++) {
+			if(head.a[i] != null) {
+				System.out.println(Character.toString('a'+i)+" "+head.flag);
+				print(head.a[i]);
+			}
+		}
+	}
+}
+
+public class dsa{
+	
+	public static void main(String[] abcd){		
+		Trie t = new Trie();
+		t.add("apple");
+		t.search("apple");
+		t.print(t.head);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

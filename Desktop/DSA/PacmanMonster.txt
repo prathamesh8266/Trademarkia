@@ -1,0 +1,113 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	static Scanner sc = new Scanner(System.in);
+	public static void main(String atgs[]) {
+		int test = sc.nextInt();
+		int size = sc.nextInt();
+		int range = sc.nextInt();
+		for(int i=0;i<test;i++) {
+			pacMan(size,range);
+		}
+	}
+	
+	static void pacMan(int n,int r) {
+		String str= "";
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				str+=sc.next();
+			}
+		}
+		String toComp = "";
+		int count = 0;
+		for(int i=0;i<n;i++) {
+			for(int j=0;j<n;j++) {
+				toComp += str.charAt(j+(i*3));
+			}
+			count +=count(toComp,r);
+			toComp = "";
+		}
+		System.out.println(count);
+	}
+	
+	static  int count = 0;
+	
+	static int count(String str,int range) {
+		int arr1[] = new int[str.length()];
+		int arr2[] = new int[str.length()];
+		int n = str.length();
+		for(int i=0;i<n;i++) {
+			if(str.charAt(i) == 'P') 
+				arr1[i] = arr2[i] = 0;
+			else 
+				arr1[i] = arr2[i] = 1;
+		}
+		for(int i=0;i<n;i++) {
+			if(arr1[i] == 1) {
+				for(int j=i+1;j<i+range+1;j++) {
+					if(j > arr1.length-1)
+						break;
+					if(arr1[j] == 0)
+						arr1[j] = -1;
+						break;
+				}
+			}
+		}
+		int z1 = 0;
+		for(int i=0;i<n;i++) {
+			if(arr1[i] == 0) z1++;
+			System.out.print(arr1[i]+" ");
+		}	
+		System.out.println("////////");
+		for(int i=n-1;i>=0;i--) {
+			if(arr2[i] == 1) {
+				for(int j=i-1;j>i-range-1;j--) {
+					if(j < 0)
+						break;
+					if(arr2[j] == 0)
+						arr2[j] = -1;
+						break;
+				}
+			}
+		}
+		int z2 = 0;
+		for(int i=0;i<n;i++) {
+			if(arr2[i] == 0) z2++;
+					System.out.print(arr2[i]+" ");
+		}
+		System.out.println();
+		return Math.min(z1, z2);
+	}
+}	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

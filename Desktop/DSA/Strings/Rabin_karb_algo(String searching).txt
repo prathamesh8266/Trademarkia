@@ -1,0 +1,48 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args){
+			String txt = "THIS IS A TEST TEXT";
+			String  pat = "TEST";
+			search(txt,pat,q);
+		}
+		
+		public static void search(String str1,String str2,int q) {
+			int n2 = str2.length();
+			int n1 = str1.length();
+			long len1 = 0;
+			long len2 = 0;
+			for(int i=0;i<n2;i++) {
+				len1 += (str1.charAt(i)-'A'+1)*Math.pow(10,(n2-1)-i);
+				len2 += (str2.charAt(i)-'A'+1)*Math.pow(10,(n2-1)-i);
+			}
+			System.out.println(len1+" "+len2);
+			int s = 0;
+			int e = n2-1;
+			while(e<n1) {
+				if(len1 == len2) {			
+					if(checkValid(str1,s,e,str2)) {						
+						System.out.println(s+" "+e);
+						System.out.println("Found at index : "+s);
+					}
+				}
+				else {
+					len1 -= (str1.charAt(s)-'A'+1)*Math.pow(10,n2-1);
+					len1 *= 10;
+					len1 += str1.charAt(e+1)-'A'+1;
+				}
+//				System.out.println(len1+" "+len2);
+				e++;s++;
+			}
+		}
+		
+		public static boolean checkValid(String str1,int i,int j,String str2) {
+			if(str1.substring(i, j+1).equals(str2)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+}

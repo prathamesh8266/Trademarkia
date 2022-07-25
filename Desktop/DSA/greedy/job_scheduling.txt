@@ -1,0 +1,40 @@
+package com.company;
+
+import java.util.*;
+
+public class leetCode {
+    public  static void main(String args[]){
+        System.out.println(maxMeetings(new int[]{10,12,40},new int[]{100,25,30},3));
+    }
+
+    public static int maxMeetings(int start[], int end[], int n) {
+        ArrayList<meet> ar = new ArrayList<>();
+        for(int i=0;i<n;i++){
+               ar.add(new meet(start[i],end[i]));
+        }
+        ar.sort(new Comparator<meet>() {
+            @Override
+            public int compare(meet o1, meet o2) {
+                return o1.end-o2.end;
+            }
+        });
+        int prev = -1;
+        int count = 0;
+        for(int i=0;i<n;i++) {
+            if (ar.get(i).start > prev) {
+//                System.out.println(ar.get(i).start+" "+prev);
+                    count++;
+                    prev = ar.get(i).end;
+            }
+        }
+        return count;
+    }
+
+    static class meet{
+        int start,end;
+        meet(int s,int e){
+            start =s;
+            end =e;
+        }
+    }
+}

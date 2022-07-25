@@ -1,0 +1,106 @@
+package DSA;
+import java.util.HashMap;
+import java.util.HashSet;
+
+public class dsa {	
+	
+	static class Node{
+		int data;
+		Node next;
+		Node(int d){			
+			data = d;
+			next = null;
+		}
+	}
+	static class linkedList{
+		Node head;
+		void hardCode() {
+			head = new Node(1);
+			head.next = new Node(2);
+			head.next.next = new Node(3);
+			head.next.next.next = new Node(4);
+			Node temp = head.next.next.next;
+			head.next.next.next.next = new Node(5);
+			head.next.next.next.next.next = new Node(6);
+			head.next.next.next.next.next.next = temp;
+		}
+		void print() {
+			Node temp = head;
+			while(temp!=null) {
+				System.out.print(temp.data+" ");
+				temp = temp.next;
+			}
+		}
+		void findLoop(Node head){
+//	        HashSet<Node> set = new HashSet<>();
+//	        Node temp = head;
+//	        while(temp != null) {
+//	        	if(set.contains(temp.next)) {
+//	        		System.out.println(temp.data);
+//	        		temp.next=null;
+//	        		return;
+//	        	}
+//	        	else {
+//	        		set.add(temp);
+//	        	}
+//	        	temp = temp.next;
+//	        }
+			Node fast = head;
+			Node slow = head;
+			while(fast!=null) {
+				fast = fast.next;
+				if(fast!=null) {
+					fast = fast.next;
+					slow = slow.next;
+					if(fast == slow) {
+						fast = head;
+						while(fast.next!=slow.next) {
+							fast = fast.next;
+							slow = slow.next;
+						}
+						fast.next = null;
+						break;
+					}
+				}
+			}
+		
+		}
+	}
+	 public static void main(String[] args){
+		linkedList ll = new linkedList();
+		ll.hardCode();
+		ll.findLoop(ll.head);
+		ll.print();
+	 }
+  	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

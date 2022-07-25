@@ -1,0 +1,39 @@
+package test;
+
+import java.util.*;
+
+// https://leetcode.com/problems/search-insert-position/submissions/
+
+public class Test {		
+    public static void main(String args[]){
+    	int arr[] = {1};
+    	System.out.println(searchInsert(arr,2));
+    }
+    
+    static public int searchInsert(int[] nums, int target) {
+        return searchInsertUtil(0,(nums.length-1)>>1,nums.length-1,nums,target);
+    }
+    
+    static int searchInsertUtil(int start,int mid,int end,int nums[],int target) {
+    	System.out.println(start+" "+mid+" "+end);
+    	if(start == end && nums[start]<target)
+    		return start + 1;
+    	if(start == mid && mid+1 == end && nums[end]==target)
+    		return end;
+    	if(start == mid && mid+1 == end && nums[end]<target)
+    		return end+1;
+    	if(start == mid && mid+1 == end && nums[end]>target && nums[mid]<target)
+    		return end;
+    	if(start == end)
+    		return start;
+    	
+    	if(nums[mid]<target)
+    		return searchInsertUtil(mid,(mid+end) >>> 1,end,nums,target);
+    	
+    	if(nums[mid]>=target)
+    		return searchInsertUtil(start,(start+mid) >>> 1,mid,nums,target);
+    	
+    	return -1;
+    }
+}
+	\

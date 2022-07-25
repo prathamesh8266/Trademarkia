@@ -1,0 +1,132 @@
+package DSA;
+import java.util.*;
+
+class UnDirectedGraph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+//		System.out.println("Enter the number of Edges: ");
+		int edge = sc.nextInt();
+//		System.out.println("Enter the number of vertices: ");
+		int vertice = sc.nextInt();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+			ar.get(b).add(a);
+		}
+	}
+}
+
+class DirectedGraph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	void construct() {
+		Scanner sc = new Scanner(System.in);
+//		System.out.println("Enter the number of Edges: ");
+		int edge = sc.nextInt();
+//		System.out.println("Enter the number of vertices: ");
+		int vertice = sc.nextInt();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+		}
+	}
+}
+
+
+class trees {
+	public static void main(String str[]) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the number of Edges: ");
+		int edge = sc.nextInt();
+		System.out.println("Enter the number of verteces: ");
+		int vertice = sc.nextInt();
+		ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+		for(int i=0;i<=edge;i++) {
+			ar.add(new ArrayList<>());
+		}
+		System.out.println(ar);
+		for(int i=0;i<vertice;i++) {
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			ar.get(a).add(b);
+			ar.get(b).add(a);
+		}
+		System.out.println(ar);
+		dfs(ar);
+		bfs(ar);
+	}
+	
+	static void bfs(ArrayList<ArrayList<Integer>> ar) {
+		boolean vis[] = new boolean[10];
+		Arrays.fill(vis, false);
+		ArrayList<Integer> bfs = new ArrayList<>();
+		for(int i=1;i<ar.size();i++) {
+			if(vis[i] == false && ar.get(i) != null) {
+				Queue<Integer> q = new LinkedList<>();
+				q.offer(i);
+				vis[i] = true;
+				while(!q.isEmpty()) {
+					int top = q.poll();
+					bfs.add(top);
+					for(int temp : ar.get(top)) {
+						if(!vis[temp]) {
+							vis[temp] = true;
+							q.offer(temp);
+						}
+					}
+				}
+			}
+		}
+		System.out.println(bfs);
+	}
+	
+	static void dfs(ArrayList<ArrayList<Integer>> ar) {
+		boolean vis[] = new boolean[10];
+		for(int i=1;i<ar.size();i++) {
+			if(!vis[i]) {
+				Stack<Integer> s = new Stack<>();
+				s.push(i);
+				vis[i] = true;
+				while(!s.isEmpty()) {
+					int top = s.pop();
+					System.out.print(top+" ");
+					for(int temp : ar.get(top)) {
+						if(!vis[temp]) {
+							vis[temp] = true;
+							s.push(temp);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

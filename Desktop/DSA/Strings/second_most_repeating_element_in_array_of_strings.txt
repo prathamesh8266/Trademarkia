@@ -1,0 +1,40 @@
+package test;
+import java.util.*;
+import java.util.Map.Entry;
+
+public class Test {
+
+		public static void main(String[] args){
+			System.out.println(secFrequent(new String[]{"", "", "aaa", "aaa", "bbb","aaa"},6));
+		}
+		
+		 static String secFrequent(String arr[], int N)
+		    {
+		        Map<String,Integer> map = new HashMap<>();
+		        for(int i=0;i<N;i++){
+		            if(map.containsKey(arr[i])){
+		                map.put(arr[i],map.get(arr[i])+1);
+		            }else{
+		            	map.put(arr[i],1);
+		            }
+		        }
+		        System.out.println(map);
+		        int a[] = new int[map.size()];
+		        int i=0;
+		        for(Entry<String, Integer> en:map.entrySet()) {
+		        	a[i] = en.getValue();
+		        	i++;
+		        }
+		        Arrays.sort(a);
+		        int j = a.length-2;
+		        while(a[j] == a[j+1]) {
+		        	j--;
+		        }
+		        for(Entry<String, Integer> en:map.entrySet()) {
+		        	if(en.getValue() == a[j]) {
+		        		return en.getKey();
+		        	}
+		        }
+		        return null;
+		    }
+}

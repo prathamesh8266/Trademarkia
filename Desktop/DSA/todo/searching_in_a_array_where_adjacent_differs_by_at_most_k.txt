@@ -1,0 +1,59 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main (String[] args) {		
+		System.out.println(stepArr(new int[] {2, 4, 5, 7, 7, 6},6,2));
+	}
+	
+	public static int stepArr(int[] nums , int x , int k) {
+		for(int i=0;i<nums.length;i++) {
+			if(nums[i] == x) {
+				if(i == nums.length-1 || nums[i] == nums[i-1]-k ) {
+					return i;
+				}
+				if( i == 0 || (nums[i] == nums[i+1]-k)) {
+					return i;
+				}
+				else if(i>0 && (i<nums.length) && ((nums[i] == nums[i+1]-k) || nums[i] == nums[i-1]-k)){
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+		
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

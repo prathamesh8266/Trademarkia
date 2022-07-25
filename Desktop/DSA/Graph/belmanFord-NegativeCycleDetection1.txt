@@ -1,0 +1,87 @@
+package DSA;	
+import java.util.*;
+
+class Node{
+	int destination,weight;
+	Node(int dest,int wgt){
+		destination = dest;
+		weight = wgt;
+	}
+}
+
+class Graph{
+	ArrayList<ArrayList<Node>> adj = new ArrayList<>();
+	Graph(int number){
+		for(int i=0;i<number;i++)
+			adj.add(new ArrayList<>());
+	}
+	
+	void addUndirectedEdges(int source,int destination,int weight) {
+		adj.get(source).add(new Node(destination,weight));
+//		adj.get(destination).add(new Node(source,weight));
+	}
+}
+
+public class dsa{
+
+	static boolean BellmanFord(ArrayList<ArrayList<Node>> adj,int n) {
+		int cycle[] = new int[n];
+		Arrays.fill(cycle, Integer.MAX_VALUE);
+		
+		cycle[0] = 0;
+		for(int j=0;j<n-1;j++) {
+			for(int i=0;i<n;i++) {
+				for(Node num : adj.get(i)) {
+					if(cycle[i]+num.weight < cycle[num.destination]) {
+						cycle[num.destination] = cycle[i]+num.weight;
+					}
+				}
+			}
+		}
+		for(int i=0;i<n;i++) {
+			System.out.print(cycle[i]+" ");
+		}
+		System.out.println();
+		for(int i=0;i<n;i++) {
+			for(Node num : adj.get(i)) {
+				if(cycle[i]+num.weight < cycle[num.destination]) {
+					return true;
+				}
+			}
+		}
+		for(int i=0;i<n;i++) {
+			System.out.print(cycle[i]+" ");
+		}
+		return false;
+	}
+	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n = 4;
+		Graph g = new Graph(n);
+		for(int i=0;i<4;i++) {
+			int source = sc.nextInt();
+			int destination = sc.nextInt();
+			int weight = sc.nextInt();
+			g.addUndirectedEdges(source, destination,weight);
+		}				
+		System.out.println(BellmanFord(g.adj,4));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

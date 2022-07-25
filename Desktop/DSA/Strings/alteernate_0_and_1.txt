@@ -1,0 +1,32 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args){
+//			System.out.println(minFlips("001"));
+//			System.out.println(minFlips("0001010111"));
+			System.out.println(minFlips("000001111111100000000000"));
+		}
+		
+		public static int minFlips(String S) {
+			return Math.min(checkFlips(S,'0'),checkFlips(S,'1'));
+	    } 
+		
+		public static int checkFlips(String s,char c) {
+			int count = 0;
+			int i = 0;
+			while(i<s.length()) {
+				if(s.charAt(i)==c) {
+					count++;
+				}
+				c = reverse(c);
+				i++;
+			}
+			return count;
+		}
+		
+		public static char reverse(char c) {
+			return c=='1' ? '0' : '1';
+		}
+}

@@ -1,0 +1,99 @@
+package DSA;
+
+import java.util.*;
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+	
+		 int arr[] = {1,2,5};
+		 System.out.println(sum(arr,arr.length));
+		 
+	}
+	
+	static boolean sum(int[] s,int n) {
+		int sum = 0;
+		for(int i=0;i<n;i++) {
+			sum += s[i];
+		}
+		if(sum%2!=0) {
+			return false;
+		}else {
+			return eqSum(s,n,sum/2);
+		}
+	}	
+
+	static boolean eqSum(int s[],int n,int sum) {
+		System.out.println(sum);
+		if(sum == 0) {
+			return true;
+		}
+		if(n==0) {
+			return false;
+		}
+		if(s[n-1]>sum) {
+			return dp[n][sum]=eqSum(s,n-1,sum);
+		}
+		return eqSum(s,n-1,sum-s[n-1]) || eqSum(s,n-1,sum);
+		
+//		
+//		boolean dp[][] = new boolean[n+1][sum+1];
+//		for(int i=1;i<n+1;i++) {
+//			int j = 0;
+//			dp[i][j]=false;
+//		}
+//		for(int i=0;i<n+1;i++) {
+//			for(int j=0;j<sum+1;j++) {
+//				if(j == 0)
+//					dp[i][j] = true;
+//				if(i==0) {
+//					continue;
+//				}
+//				else if(s[i-1]>j) {
+//					dp[i][j] = dp[i-1][j];
+//				}else {
+//					dp[i][j] = dp[i-1][j-s[i-1]] || dp[i-1][j];
+//				}
+//			}
+//			for(int a=0;a<n;a++) {
+//				for(int b=0;b<sum;b++) {
+//					System.out.print(dp[a][b]+" ");
+//				}
+//				System.out.println();
+//			}
+//			System.out.println();
+//		}
+//		return dp[n][sum];
+	}
+}
+	 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

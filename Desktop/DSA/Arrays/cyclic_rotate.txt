@@ -1,0 +1,28 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		rotate(new int[] {1,2},2);
+	}
+	
+	static void rotate(int arr[], int n)
+	{
+		if(arr.length == 1){
+            System.out.println(arr[0]);
+            return;
+        }
+		int end = arr[n-1];
+		int ind = n-1;
+		while(ind>0) {
+			arr[ind]=arr[ind-1];
+			ind--;
+		}
+	    arr[0] = end;
+	    for(int i:arr) {
+	    	System.out.print(i+" ");
+	    }
+	}
+}
+

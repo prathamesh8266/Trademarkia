@@ -1,0 +1,78 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		int[] arr = reArrange(new int[] {1, 2, 3, -4, -1, 4});
+		for(int a:arr) {
+			System.out.print(a+" ");
+		}
+		
+	}
+	
+	public static int[] reArrange(int[] nums){
+		int ind = nums.length-1;
+		while(nums[ind]<0) ind--;
+		int i = 0;
+		while(i<ind) {
+			if(nums[i]<0) {
+				nums = swap(nums,i,ind);
+				ind--;
+			}
+			i++;
+		}
+		i = 0;
+		ind = nums.length-1;
+		while(i<nums.length) {
+			if(nums[ind]>=0) break;
+			nums=swap(nums,i,ind);
+			i+=2;ind--;
+		}
+		return nums;
+	        
+    }
+	
+	public static int[] swap(int[] arr,int a,int b) {
+		int temp = arr[a];
+		arr[a] = arr[b];
+		arr[b] = temp;
+		return arr;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

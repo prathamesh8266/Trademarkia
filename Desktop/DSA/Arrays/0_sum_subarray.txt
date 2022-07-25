@@ -1,0 +1,60 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		boolean arr = reArrange(new int[] {4 ,2 ,-3 ,1 ,6});
+			System.out.print(arr);
+	}
+	
+	public static boolean reArrange(int[] nums){
+		Set<Integer> set = new HashSet<>();
+        if(arr.length == 1) return false;
+        if(arr.length == 1 && arr[0]==0) return true;
+        if(arr[0]+arr[1]==0) return true;
+		int count = 0;
+		for(int a:arr) {
+			count+=a;
+			if(set.contains(count)) return true;
+			set.add(count);
+		}
+		return false;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

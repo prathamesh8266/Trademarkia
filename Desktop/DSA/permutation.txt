@@ -1,0 +1,30 @@
+package DSA;	
+import java.util.*;
+
+
+public class dsa{
+	public static void main(String[] args){
+		int arr[] = {3,2,1};
+		permute(arr,new ArrayList<>());
+		System.out.println(ar1);
+	}
+	
+	static ArrayList<ArrayList<Integer>> ar1 = new ArrayList<>();
+	
+	static public void permute(int[] nums,ArrayList<Integer> ar) {
+		if(ar.size() == nums.length) {
+			ar1.add(new ArrayList<>(ar));
+			return;
+		}
+		
+		for(int i=0;i<nums.length;i++) {
+			if(!ar.contains(nums[i])){
+					ArrayList<Integer> temp = new ArrayList<>(ar);
+					temp.add(nums[i]);
+					permute(nums,new ArrayList<>(temp));
+			}
+		}
+		
+	}
+}
+

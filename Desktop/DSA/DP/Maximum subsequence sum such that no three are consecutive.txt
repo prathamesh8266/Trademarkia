@@ -1,0 +1,42 @@
+package DSA;	
+import java.util.*;
+
+// https://www.geeksforgeeks.org/maximum-subsequence-sum-such-that-no-three-are-consecutive/
+
+public class dsa{
+	
+	public static void main(String args[]) {
+		int a[] = {1, 1, 1, 1, 1};
+		System.out.println(solve(a,a.length));
+	}
+   
+   
+   static public int solve(int[] nums, int k) {
+	   if(k <= 0)
+		   return 0;
+	   
+	   int temp = 0;
+	   if(k-2>=0) {
+		  temp = nums[k-1]+nums[k-2]+solve(nums,k-3);
+	   }
+	   
+	   return Math.max(temp,solve(nums,k-1));
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

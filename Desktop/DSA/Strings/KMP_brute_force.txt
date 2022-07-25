@@ -1,0 +1,41 @@
+package test;
+import java.util.*;
+
+public class Test {
+
+		public static void main(String[] args){
+			String txt = "aabcdaabc";
+			lps(txt);
+		}
+		
+//		aabcdaabc
+//		abcab
+//		aaaa
+//		gigummcnu
+		
+//		proper prefix means string ranging from start to last-1
+//		proper sufix means string ranging from start+1 to end
+//		eg abcdef -> prefix = abcde or ab or abc or a... ; sufix = bcdef or ef or def or ef ....
+		
+		public static void lps(String str) {
+	        int s1 = 0;
+	        int s2 = 0;
+	        int e1 = str.length();
+	        int e2 = str.length();
+	        int count = 0;
+	        int local = 0;
+	       while(e2 >= 0 && s2 < str.length()) {
+	    	   String st = str.substring(s1,s2);
+	    	   String check = str.substring(e2,e1);
+	    	   if(check.contains(st)) {
+	    		   local = st.length();
+	    		   if(local>count) {
+	    			   count = local;
+	    		   }
+	    	   }
+//	    	   System.out.println(st+" "+check);
+	    	   s2++;e2--;
+	       }
+	       System.out.println(count);
+	    }
+}

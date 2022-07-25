@@ -1,0 +1,39 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		int arr[] = {2,4};
+		int dp[] = new int[1000];
+		Arrays.fill(dp, -1);
+		System.out.println(targetSum(arr,10, new ArrayList<>(),Integer.MAX_VALUE));
+	}
+	
+	static ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+
+	static ArrayList targetSum(int arr[],int sum,ArrayList nums,int minVal) {
+		if(sum == 0) {
+			return nums;
+		}
+		if(sum < 0 ) {
+			return null;
+		}
+		ArrayList<Integer> ar1 = null;
+		for(int i=0;i<arr.length;i++) {
+			if(arr[i]<=sum) {
+				ArrayList<Integer> ar2 = new ArrayList<Integer>(nums);
+				ar2.add(arr[i]);
+				ArrayList<Integer> temp = targetSum(arr,sum-arr[i],ar2,minVal);
+				if(temp != null && temp.size() < minVal) {
+					minVal = temp.size();
+					ar1 = temp;
+				}
+			}
+		}
+		return ar1;
+	}
+}
+
+
+s

@@ -1,0 +1,29 @@
+package DSA;
+import java.util.*;
+
+class trees {
+	public static void main(String str[]) {
+		String s1 = "this is a book";
+		String s2 = "his i";
+		System.out.println(util(s1,s2,0,0,0,true));
+		System.out.println(start +" "+ end);
+	}
+	static int start = 0, end = 0;
+	public static boolean util(String s1,String s2,int ind1,int ind2,int match,boolean f) {
+		if(match == s2.length()) {
+			end = ind1-1;
+			return true;
+		}
+		if(ind1 >= s1.length())
+			return false;
+		
+		if(s1.charAt(ind1) == s2.charAt(ind2)) {
+			if(f == true) {
+				start = ind1;
+			}
+			return util(s1,s2,ind1+1,ind2+1,match+1,false);
+		}
+		
+		return util(s1,s2,ind1+1,0,match,true)||util(s1,s2,ind1+1,0,match,true);
+	}
+}

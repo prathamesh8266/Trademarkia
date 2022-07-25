@@ -1,0 +1,29 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	public static void main(String[] args) {
+		int[] arr = nbyk(new int[] { 3, 1, 2, 2, 1, 2, 3, 3 },3);
+		for(int a:arr) {
+			System.out.println(a);
+		}
+	}
+	
+	static int[] nbyk(int arr[], int k){
+	    List<Integer> li = new ArrayList<>();
+		Arrays.sort(arr);
+	    int count = 0;
+	    for(int i=1;i<arr.length;i++){
+	    	if(arr[i]!=arr[i-1]) {count=0;continue;}
+	    	if(arr[i]==arr[i-1]) count++;
+	    	if(count==arr.length/k) li.add(arr[i]);
+	    }
+	    int[] ret = new int[li.size()];
+	    for(int i=0;i<li.size();i++) {
+	    	ret[i] = li.get(i);
+	    }
+	    return ret;
+	}
+}
+

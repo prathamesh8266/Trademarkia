@@ -1,0 +1,69 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main (String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		sc.nextLine();
+		while(test!=0) {
+			String s = sc.nextLine();
+			int max = -1;
+			int count = 0;
+			int i=0;
+			while(i<s.length()-1) {
+				if(s.charAt(i)==s.charAt(i+1)) {
+					count++;
+					max = Math.max(max, count);
+				}else {
+					count = 0;
+				}
+				i++;
+			}
+			System.out.println(max);
+			if(max<=s.length()-max+2) {
+				System.out.println(1);
+			}else {
+				System.out.println(0);
+			}
+			test--;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

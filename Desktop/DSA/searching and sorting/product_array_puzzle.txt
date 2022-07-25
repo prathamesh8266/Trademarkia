@@ -1,0 +1,77 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main (String[] args) {	
+		int[] arr  = {0,1,2,3,0,5};
+		long[] arr1 = productExceptSelf(arr,2);
+		for(long i:arr1) {
+			System.out.print(i+" ");
+		}
+	}
+	public static long[] productExceptSelf(int nums[], int n){ 
+        long[] a = new long[nums.length];
+        long b=1;
+        long z=1;
+        boolean flag = false;
+        for(int i=0;i<nums.length;i++) {
+        	b*=nums[i];
+        	if(nums[i]==0) flag = true;
+        }
+        if(flag) {        	
+        	int cnt = 0;
+        	for(int i=0;i<nums.length;i++) {
+        		if(nums[i]==0 && cnt<1) { cnt++;continue;}
+        		z*=nums[i];
+        	}
+        }
+        if(!flag) {        	
+        	for(int i=0;i<nums.length;i++) {
+        		if(nums[i]==0) {
+        			a[i]=b;
+        		}else {        		
+        			a[i]=b/nums[i];
+        		}
+        	}
+        }
+        if(flag) {        	
+        	for(int i=0;i<nums.length;i++) {
+        		if(nums[i]==0) {
+        			a[i]=z;
+        		}else {        		
+        			a[i]=0;
+        		}
+        	}
+        }
+        return a;
+	} 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

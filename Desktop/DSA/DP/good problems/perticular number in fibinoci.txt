@@ -1,0 +1,41 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {	
+	
+	public static void main(String args[]) {
+		long dp[] = new long[100];
+		long dp1[] = new long[100];
+		System.out.println(fib(50,dp1,true));
+		System.out.println(fib(50,dp));
+		System.out.println(fib(50));
+	}
+	
+	static long fib(int a,long dp[]) {
+		if(a<=2) return 1;
+		if(dp[a]!=0)
+			return dp[a];
+		return dp[a] = (fib(a-1,dp)+fib(a-2,dp));
+	}
+	static long fib(int a) {
+		if(a<=2) return 1;
+		return fib(a-1)+fib(a-2);
+	}
+	
+	static long fib(int a,long dp[],boolean f) {
+		for(int i=0;i<=a;i++) {
+			if(i<2)
+				dp[i] = 1;
+			else
+				dp[i] = dp[i-1]+dp[i-2];
+		}
+		return dp[a-1];
+	}
+}
+	
+
+
+
+
+
+

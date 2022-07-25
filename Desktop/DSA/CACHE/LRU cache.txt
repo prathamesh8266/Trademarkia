@@ -1,0 +1,108 @@
+package DSA;
+import java.util.*;
+import java.math.*;
+
+class Node{
+	Node prev,next;
+	int key,val;
+	Node(int _k,int _v){
+		key = _k;
+		val = _v;
+	}
+	Node(){}
+}
+
+class LRU{
+	Node head,tail;
+	private Map<Integer,Node> map;
+	int size,count=0;
+	LRU(int s){
+// initialize everything
+		size = s;
+		head = new Node();
+		tail = new Node();
+		head.next = tail;
+		tail.prev = head;
+		map = new HashMap<>();
+	}
+
+	void add(int key,int val) {
+// increament count while adding and if count > size remove least recenty used node which exists before tail node
+		count++;
+		if(count > size) {
+			Node temp = tail.prev;
+			temp.next.prev = temp.prev;
+			temp.prev.next = temp.next;
+			map.remove(temp.val);
+			count--;
+		}
+		if(!map.containsKey(key)) {
+			Node toAdd = new Node(key,val);
+			map.put(key, toAdd);
+			addNodeAtStart(toAdd);
+		}else {
+			Node temp = map.get(key);
+			temp.prev.next = temp.next;
+			temp.next.prev = temp.prev;
+			Node toAdd = new Node(key,temp.val);
+			map.put(key,toAdd);
+			addNodeAtStart(toAdd);
+		}
+	}
+	
+	int get(int key) {
+		if(map.containsKey(key)) {
+			Node temp = map.get(key);
+			temp.prev.next = temp.next;
+			temp.next.prev = temp.prev;
+			Node toAdd = new Node(key,temp.val);
+			map.put(key,toAdd);
+			addNodeAtStart(toAdd);
+			return map.get(key).val;
+		}else {
+			return -1;
+		}
+	}
+	
+// helper function for for adding a node in recent place, i.e after the head
+	private void addNodeAtStart(Node toAdd) {
+		Node temp = head.next;
+		head.next = toAdd;
+		toAdd.next = temp;
+		temp.prev = toAdd;
+		toAdd.prev = head;
+	}
+}
+
+public class dsa{
+	public static void main(String[] abcd){
+		LRU lru = new LRU(2);
+		lru.add(1, 1);
+		lru.add(2, 2);
+		System.out.println(lru.get(1));
+		lru.add(3, 3);
+		System.out.println(lru.get(2));
+		System.out.println(lru.get(3));
+		System.out.println(lru.get(1));
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

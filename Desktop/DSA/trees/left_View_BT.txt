@@ -1,0 +1,95 @@
+package DSA;
+import java.util.*;
+import java.util.Scanner;
+
+class Node{
+	int data;
+	Node left,right;
+	Node(int d){
+		data = d;
+	}
+}
+
+public class trees {
+	static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		Node t = tree();
+		leftView(t,1);
+	}
+	
+	static Node tree() {
+		Node root = null;
+		System.out.println("Enter Node: ");
+		int n = sc.nextInt();
+		if(n == -1) return null;
+		root = new Node(n);
+		System.out.println("enter left of "+n);
+		root.left = tree();
+		System.out.println("enter right of "+n);
+		root.right = tree();
+		return root;
+	}
+	
+	static void preOrder(Node root) {
+		if(root == null) return;
+		System.out.println(root.data);
+		preOrder(root.left);
+		preOrder(root.right);
+		return;
+	}
+
+	static ArrayList<Integer> ar = new ArrayList<>();
+	static int max_level = 0;
+	static void leftView(Node node,int level)
+    {
+//		 // Base Case
+//        if (node == null)
+//            return ar;
+// 
+//        // If this is the first node of its level
+//        if (max_level < level) {
+////            System.out.print(" " + node.data);
+//            ar.add(node.data);
+//            max_level = level;
+//        }
+// 
+//        // Recur for left and right subtrees
+//        leftView(node.left, level + 1);
+//        leftView(node.right, level + 1);
+//        return ar;
+
+		if (node == null)
+		    return;
+		
+		Queue<Node> queue = new LinkedList<>();
+		queue.add(node);
+		
+		while (!queue.isEmpty()) {
+		    // number of nodes at current level
+		    int n = queue.size();
+		
+		    // Traverse all nodes of current level
+		    for (int i = 1; i <= n; i++) {
+		        Node temp = queue.poll();
+		
+		        // Print the left most element at
+		        // the level
+		        if (i == 1)
+		            System.out.print(temp.data + " ");
+		
+		        // Add left node to queue
+		        if (temp.left != null)
+		            queue.add(temp.left);
+		
+		        // Add right node to queue
+		        if (temp.right != null)
+		            queue.add(temp.right);
+		    }
+		}
+
+    }
+	
+	
+}
+

@@ -1,0 +1,76 @@
+package DSA;	
+import java.util.*;
+
+public class dsa {
+	
+	public static void main(String args[] ){
+		Scanner sc = new Scanner(System.in);
+		int test = sc.nextInt();
+		ArrayList<ArrayList<Integer>> li1 = new ArrayList<>();
+		int cows[] = new int[test];
+		for(int i=0;i<test;i++) {
+			ArrayList<Integer> li = new ArrayList<>();
+			int len = sc.nextInt();
+			cows[i] = sc.nextInt();
+			for(int j=0;j<len;j++) {
+				li.add(sc.nextInt());
+			}
+			li1.add(li);
+		}
+		for(int i = 0;i<li1.size();i++) {			
+			System.out.println(aggressiveCows(li1.get(i),cows[i]));
+		}
+    }
+	 public static int aggressiveCows(ArrayList<Integer> stalls,int cows){
+	     Collections.sort(stalls);
+	     int n = stalls.size();
+	     int low = 0; int high = stalls.get(n-1) ,mid,best=0;
+	     while(low<=high) {
+	    	 mid = (low+high+1)/2;
+	    	 int cnt = 1;int left = 0;
+	    	 for(int i=1;i<n && cnt<cows;i++) {
+	    		 if(stalls.get(i)-stalls.get(left)>=mid) {
+	    			 cnt++;left = i;
+	    		 }
+	    	 }
+	    	 if(cnt >= cows) {
+	    		 low = mid+1;
+	    		 best = mid;
+	    	 }
+	    	 if(cnt<cows) {
+	    		 high = mid-1;
+	    	 }
+	     }
+	    return best;
+	 }
+}	      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

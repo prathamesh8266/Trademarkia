@@ -1,0 +1,128 @@
+package DSA;
+import java.util.*;
+
+class Graph{
+	ArrayList<ArrayList<Integer>> ar = new ArrayList<>();
+	Scanner sc = new Scanner(System.in);
+	void undirected() {
+		int edges = sc.nextInt();
+		int vertices = sc.nextInt();
+		for(int i=0;i<edges;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertices;i++) {
+			int n1 = sc.nextInt();
+			int n2 = sc.nextInt();
+			ar.get(n1).add(n2);
+			ar.get(n2).add(n1);
+		}
+	}
+	ArrayList<ArrayList<int[]>> d_ar = new ArrayList<>();
+	void directed() {
+		int edges = sc.nextInt();
+		int vertices = sc.nextInt();
+		for(int i=0;i<edges;i++) {
+			ar.add(new ArrayList<>());
+		}
+		for(int i=0;i<vertices;i++) {
+			int n1 = sc.nextInt();
+			int n2 = sc.nextInt();
+			ar.get(n1).add(n2);
+		}
+	}
+	void directedweighted() {
+		int edges = sc.nextInt();
+		int vertices = sc.nextInt();
+		for(int i=0;i<edges;i++) {
+			d_ar.add(new ArrayList<int[]>());
+		}
+		for(int i=0;i<vertices;i++) {
+			int n1 = sc.nextInt();
+			int n2 = sc.nextInt();
+			int w = sc.nextInt();
+			d_ar.get(n1).add(new int[] {n2,w});
+		}
+	}
+	void undirectedweighted() {
+		int edges = sc.nextInt();
+		int vertices = sc.nextInt();
+		for(int i=0;i<edges;i++) {
+			d_ar.add(new ArrayList<int[]>());
+		}
+		for(int i=0;i<vertices;i++) {
+			int n1 = sc.nextInt();
+			int n2 = sc.nextInt();
+			int w = sc.nextInt();
+			d_ar.get(n2).add(new int[]{n1,w});
+			d_ar.get(n1).add(new int[]{n2,w});
+		}
+	}
+}
+class Node{
+	int val,dist;
+	Node(int d,int v){
+		dist = d;
+		val = v;
+	}
+}
+
+class trees {
+	    public static void main(String str[]) {
+	    	Graph g = new Graph();
+	    	g.undirectedweighted();
+	    	System.out.println(primsMst(g.d_ar));
+	    }
+	    
+	    static int primsMst(ArrayList<ArrayList<int[]>> ar) {
+	    	int n = ar.size();
+	    	boolean vis[] = new boolean[n];
+	    	int dist[] = new int[n];
+	    	Arrays.fill(dist,Integer.MAX_VALUE);	
+	    	minMst = dfs(ar,vis,dist);
+	    	return minMst;
+	    }
+	    
+	    static int dfs(ArrayList<ArrayList<int[]>> ar,boolean[] vis,int[] dist) {
+	    	PriorityQueue<Node> pq = new PriorityQueue<>(new Comparator<Node>() {
+	    		public int compare(Node n1,Node n2) {
+	    			return n1.dist-n2.dist;
+	    		}
+	    	});
+	    	int tot = 0;
+	    	pq.offer(new Node(0,1));
+	    	while(!pq.isEmpty()) {
+	    		Node top = pq.poll();
+	    		if(!vis[top.val]) {
+	    			System.out.println(top.val+" "+top.dist);
+	    			vis[top.val] = true;
+	    			tot += top.dist;
+	    			for(int j[] : ar.get(top.val)) {
+	    				if(!vis[j[0]])
+	    					pq.offer(new Node(j[1],j[0]));
+	    			}
+	    		}
+	    	}
+	    	return tot;
+	    }
+}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+package test;
+import java.util.*;
+
+public class Test {
+	
+	 public static void main (String[] args)
+	  {
+	     String st = "ABACD";
+	     String check = "CDABA";
+	     String conc = st.concat(st);
+	     if(conc.contains(check)) {
+	    	 System.out.println(true);
+	     }
+	  }
+}

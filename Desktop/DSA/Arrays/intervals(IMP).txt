@@ -1,0 +1,72 @@
+package DSA;
+import java.util.*;
+import java.util.Map.Entry;
+
+public class dsa {
+	
+	public static void main(String[] args) {
+		merge(new int[][] {{1,3},{2,6},{8,10},{15,18}});
+	}
+	
+	public static int[][] merge(int[][] intervals) {
+		
+		Arrays.sort(intervals,(arr1,arr2)->Integer.compare(arr1[0], arr2[0]));
+		
+		List<int[]> op = new ArrayList<>();
+		int[] cur = intervals[0];
+		op.add(cur);
+		
+		for(int[] interval: intervals) {
+			int beg = cur[0];
+			int end = cur[1];
+			int Nbeg = interval[0];
+			int Nend = interval[1];
+			
+			if(end>=Nbeg) {
+				cur[1] = Math.max(end, Nend);
+			}else {
+				cur = interval;
+				op.add(interval);
+			}
+		}
+	    return op.toArray(new int[op.size()][]);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
